@@ -1,30 +1,24 @@
-class Fibonacci {
-
-    public:
+#include "fibonacci.h"
         
-        void setFibonacci(int valor){
-            indice = valor;
-            computeFibonacci();
-        }
+void Fibonacci::setFibonacci(int valor){
+    indice = valor;
+    computeFibonacci();
+}
 
-        int getFibonnaci(){
-            return resultado;
-        }
+int Fibonacci::getFibonnaci(){
+    return resultado;
+}
 
-    private:
-        int indice;
-        int resultado = 0;
-        int numAnteriorGrau1 = 1;
-        int numAnteriorGrau2 = 1;
+void Fibonacci::computeFibonacci(){
 
-        void computeFibonacci(){
+    int numAnteriorGrau1 = 1;
+    int numAnteriorGrau2 = 1;
+    
+    for(int contador = 2; contador < indice; contador++){
+        resultado = numAnteriorGrau1 + numAnteriorGrau2;
+        numAnteriorGrau2 = numAnteriorGrau1;
+        numAnteriorGrau1 = resultado;
+    }
 
-            for(int contador = 2; contador < indice; contador++){
-                resultado = numAnteriorGrau1 + numAnteriorGrau2;
-                numAnteriorGrau2 = numAnteriorGrau1;
-                numAnteriorGrau1 = resultado;
-            }
-
-            
-        }
-};
+    
+}

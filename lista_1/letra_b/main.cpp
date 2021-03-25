@@ -8,10 +8,12 @@
   *  Prof: Miguel Elias Mitre Campista
   *  Autor: Juan Coutinho Lima
 
+  * Fibonacci com classes
+
 */
 
 #include <iostream>
-#include "fibonacci.cpp"
+#include "fibonacci.h"
 
 using namespace std;
 
