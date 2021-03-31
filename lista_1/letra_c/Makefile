@@ -23,13 +23,14 @@ CC_FLAGS=-Wall
 # objetivo a ser compilado
 
 all: $(PROJ_NAME)
- 
+#linkedita 
 $(PROJ_NAME): $(OBJ)
-	$(CppC) -o $@ $^
+	$(CppC) $(CC_FLAGS) -o $@ $^
 
-#dependencias necessarias para obtencao do executavel 
+#dependencias necessarias para obtencao do executavel
+#compila
 %.o: %.c %.h
-	$(CppC) -o $@ $<
+	$(CppC) $(CC_FLAGS) -c $@ $<
 
 #limpa todos os arquivos gerados pelo compilador 
 clean:
