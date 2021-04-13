@@ -78,6 +78,8 @@ void Relatorio::printRelatorioNacional(){
         for(auto media: estado.getSerieMediaMovel()){
             cout << media << " ";
         }
+
+        cout << endl << endl;
     }
 
     cout << endl;
@@ -111,19 +113,18 @@ vector<float> Relatorio::calcMedia(Estadual estadoObj){
 void Relatorio::setMediaMovelNacional(){
 
     vector<vector<float>> mediasEstaduais;
-    //list<Estadual>::iterator iEstado;
-    //std::list <Star>::iterator iStar;
+    vector<Estadual> estadosCalculados;
 
-    for (auto iEstado = nacionalObj.getEstados().begin(); iEstado != nacionalObj.getEstados().end(); iEstado++){
-        
-        cout<<"entrei";
-        //Estadual tempEstado(iEstado->getNome(), iEstado->getSerieObitos());
-        
-        //iEstado->setSerieMediaMovel(calcMedia(tempEstado));
-        //mediasEstaduais.push_back(iEstado->getSerieMediaMovel());
+    for (unsigned int index = 0; index < nacionalObj.getEstados().size(); index++){
+        estadosCalculados.push_back(nacionalObj.getEstados()[index]);
+        estadosCalculados[index].setSerieMediaMovel(calcMedia(estadosCalculados[index]));
+        mediasEstaduais.push_back(estadosCalculados[index].getSerieMediaMovel());
     }
 
-    vector<float> mediaMovelNacional(mediasEstaduais[0].size());
+    Nacional nacionalCalculado(nacionalObj.getNome(), estadosCalculados);
+    setNacional(nacionalCalculado);
+    
+    vector<float> mediaMovelNacional(nacionalObj.getEstados()[0].getSerieMediaMovel().size());
 
     for(auto mediaEstadual: mediasEstaduais){
         transform(mediaEstadual.begin(), mediaEstadual.end(), mediaMovelNacional.begin(), mediaMovelNacional.begin(), plus<float>());

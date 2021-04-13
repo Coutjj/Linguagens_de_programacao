@@ -30,6 +30,7 @@ int main(){
 
 	cin >> diasMediaMovel;
 	//Relatorio relatorioRio(rio, diasMediaMovel);
+	//Relatorio relatorioSP(saoPaulo, diasMediaMovel);
 	Relatorio relatorioBrasil(brasil, diasMediaMovel);
 
 
@@ -49,7 +50,6 @@ int main(){
 				cout << "\nPrograma finalizado." << endl;
 				return 0;
 			case 1:
-				//relatorioRio.printRelatorio();
 				relatorioBrasil.printRelatorioNacional();
 				break;
 			case 2:
