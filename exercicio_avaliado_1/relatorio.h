@@ -17,6 +17,7 @@
 #define RELATORIO_H
 
 #include "estadual.h"
+#include "nacional.h"
 
 using namespace std;
 
@@ -25,14 +26,22 @@ class Relatorio
     private:
         vector<float> mediaMovel;
         Estadual estadoObjUnico;
+        Nacional nacionalObj;
         int numDiasMedia;
 
-        void setMediaMovel();
+        void setMediaMovel(Estadual);
+        void setMediaMovelNacional();
         void setNumDiasMedia(int);
+        void setEstado(Estadual);
+        void setNacional(Nacional);
+        vector<float> calcMedia(Estadual);
     public:
         Relatorio(Estadual, int);
+        Relatorio(Nacional, int);
         vector<float> getMediaMovel();
+        vector<float> getMediaMovelNacional();
         void printRelatorio();
+        void printRelatorioNacional();
 };
 
 

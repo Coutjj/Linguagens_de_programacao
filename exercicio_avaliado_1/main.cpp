@@ -14,20 +14,23 @@
 #include <iostream>
 #include "estadual.h"
 #include "relatorio.h"
-
+#include "nacional.h"
 
 using namespace std;
 
 int main(){
 
 	Estadual rio("Rio de Janeiro", {2, 7, 11, 21, 2, 20, 70, 80, 90});
+	Estadual saoPaulo ("Sao Paulo", {2, 7, 11, 21, 2, 20, 70, 80, 90});
+	Nacional brasil("Brasil", {rio, saoPaulo});
 	int diasMediaMovel;
 
 	cout << "\nBem-vindo(a) ao relatorio da pandemia de COVID-19." << endl;
 	cout << "Escolha o numero N de dias para a media movel\n\n";
 
 	cin >> diasMediaMovel;
-	Relatorio relatorioRio(rio, diasMediaMovel);
+	//Relatorio relatorioRio(rio, diasMediaMovel);
+	Relatorio relatorioBrasil(brasil, diasMediaMovel);
 
 
 	int escolhaUsuarioMenu = -1;
@@ -46,7 +49,8 @@ int main(){
 				cout << "\nPrograma finalizado." << endl;
 				return 0;
 			case 1:
-				relatorioRio.printRelatorio();
+				//relatorioRio.printRelatorio();
+				relatorioBrasil.printRelatorioNacional();
 				break;
 			case 2:
 				cout << "Classificacao dos Estados" << endl;

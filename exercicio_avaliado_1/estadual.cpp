@@ -25,3 +25,11 @@ void Estadual::setNome(string nome){
 string Estadual::getNome(){
     return Estadual::nome;
 }
+
+void Estadual::setSerieMediaMovel(vector<float> serieMediaMovelInput){
+    Estadual::serieMediaMovel = serieMediaMovelInput;
+}
+
+vector<float> Estadual::getSerieMediaMovel(){
+    return Estadual::serieMediaMovel;
+}

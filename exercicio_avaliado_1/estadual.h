@@ -24,7 +24,7 @@ class Estadual
     private:
         string nome;
         vector <int> serieObitos;
-    
+        vector<float> serieMediaMovel;
     public:
 
         Estadual(string nome, vector <int> serieObitos);
@@ -33,6 +33,8 @@ class Estadual
         void setSerieObitos(vector <int>);
         string getNome();
         vector <int> getSerieObitos();
+        vector<float> getSerieMediaMovel();
+        void setSerieMediaMovel(vector<float>);
 };
 
 
