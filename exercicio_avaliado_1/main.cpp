@@ -12,10 +12,24 @@
 
 
 #include <iostream>
+#include "estado.h"
+#include "relatorio.h"
+
 
 using namespace std;
 
 int main(){
+
+	vector <int> serieObitosRio = {10, 20, 30, 40, 50, 60, 70, 80, 90};
+	Estado rio("Rio de Janeiro", serieObitosRio);
+	Relatorio relatorioRio(rio);
+
+	cout << "tamanho: " << relatorioRio.getMediaMovel().size() << endl;
+	cout << "tamanho: " << rio.getNome() << endl;
+	cout << "tamanho: " << rio.getSerieObitos().size() << endl;
+	for(float media: relatorioRio.getMediaMovel()){
+		cout << media << endl;
+	}
 
 	cout << "Bem-vindo(a) ao relatorio da pandemia de COVID-19.\n"
 		<< "Escolha uma das opcoes abaixo ou selecione 0 (zero) para sair." << endl;
