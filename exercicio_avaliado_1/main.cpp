@@ -12,7 +12,7 @@
 
 
 #include <iostream>
-#include "estado.h"
+#include "estadual.h"
 #include "relatorio.h"
 
 
@@ -20,36 +20,33 @@ using namespace std;
 
 int main(){
 
-	vector <int> serieObitosRio = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-	Estado rio("Rio de Janeiro", serieObitosRio);
-	Relatorio relatorioRio(rio);
+	Estadual rio("Rio de Janeiro", {2, 7, 11, 21, 2, 20, 70, 80, 90});
+	int diasMediaMovel;
 
-	cout << "tamanho: " << relatorioRio.getMediaMovel().size() << endl;
-	cout << "tamanho: " << rio.getNome() << endl;
-	cout << "tamanho: " << rio.getSerieObitos().size() << endl;
-	for(float media: relatorioRio.getMediaMovel()){
-		cout << media << endl;
-	}
+	cout << "\nBem-vindo(a) ao relatorio da pandemia de COVID-19." << endl;
+	cout << "Escolha o numero N de dias para a media movel\n\n";
 
-	cout << "Bem-vindo(a) ao relatorio da pandemia de COVID-19.\n"
-		<< "Escolha uma das opcoes abaixo ou selecione 0 (zero) para sair." << endl;
+	cin >> diasMediaMovel;
+	Relatorio relatorioRio(rio, diasMediaMovel);
+
 
 	int escolhaUsuarioMenu = -1;
 	while (escolhaUsuarioMenu != 0){
-	
+
+		cout << "\nEscolha uma das opcoes abaixo ou selecione 0 (zero) para sair.\n\n";
 		cout << "(1) - Evolucao do numero de obitos." << endl;
 	  	cout << "(2) - Classificacao dos Estados" << endl;
-	  	cout << "(3) - Classificacao dos Estados brasileiros" << endl;
+	  	cout << "(3) - Classificacao dos Estados brasileiros\n\n";
 
 		cin >> escolhaUsuarioMenu;
 
 		switch (escolhaUsuarioMenu)
 		{
 			case 0:
-				cout << "Programa finalizado." << endl;
+				cout << "\nPrograma finalizado." << endl;
 				return 0;
 			case 1:
-				cout << "Evolucao do numero de obitos." << endl;
+				relatorioRio.printRelatorio();
 				break;
 			case 2:
 				cout << "Classificacao dos Estados" << endl;
@@ -60,8 +57,6 @@ int main(){
 			default:
 				cout << "Opcao invalida - digite 0 (zero) para sair" << endl;
 		}
-
-		cout << "Escolha outra opcao." << endl;
 	}
 
 }

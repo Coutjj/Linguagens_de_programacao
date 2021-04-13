@@ -11,15 +11,15 @@
   * alem de fornecer metodos para que estas informacoes sejam acessadas e configuradas.
 */
 
-#ifndef ESTADO_H
-#define ESTADO_H
+#ifndef ESTADUAL_H
+#define ESTADUAL_H
 
 #include <string>
 #include <vector>
 
 using namespace std;
 
-class Estado
+class Estadual
 {
     private:
         string nome;
@@ -27,8 +27,8 @@ class Estado
     
     public:
 
-        Estado(string nome, vector <int> serieObitos);
-        Estado();
+        Estadual(string nome, vector <int> serieObitos);
+        Estadual();
         void setNome(string);
         void setSerieObitos(vector <int>);
         string getNome();
@@ -36,6 +36,6 @@ class Estado
 };
 
 
-#endif // ESTADO_H
+#endif // ESTADUAL_H
 
 
