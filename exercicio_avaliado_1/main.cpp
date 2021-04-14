@@ -42,7 +42,8 @@ int main(){
 		cout << "\nEscolha uma das opcoes abaixo ou selecione 0 (zero) para sair.\n\n";
 		cout << "(1) - Evolucao do numero de obitos." << endl;
 	  	cout << "(2) - Status dos Estados" << endl;
-	  	cout << "(3) - Status Brasil\n\n";
+	  	cout << "(3) - Status Brasil" << endl;
+		cout << "(4) - Estado com maior Alta/Baixa\n\n";
 
 		cin >> escolhaUsuarioMenu;
 
@@ -60,8 +61,11 @@ int main(){
 			case 3:
 				relatorioBrasil.printStatusBrasil();
 				break;
+			case 4:
+				relatorioBrasil.printEstadoMaiorAltaBaixa();
+				break;
 			default:
-				cout << "Opcao invalida - digite 0 (zero) para sair" << endl;
+				cout << "\nOpcao invalida - digite 0 (zero) para sair" << endl;
 		}
 	}
 

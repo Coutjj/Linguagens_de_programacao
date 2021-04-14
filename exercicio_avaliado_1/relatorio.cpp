@@ -1,6 +1,5 @@
 #include "relatorio.h"
 #include <vector>
-#include <list>
 #include <iostream>
 #include <algorithm>
 
@@ -185,4 +184,30 @@ void Relatorio::printStatusBrasil(){
         cout << "Estavel\n";
     }
 
+}
+
+void Relatorio::printEstadoMaiorAltaBaixa(){
+    
+    float maiorAlta = 0.0;
+    float maiorBaixa = 1000000.0;
+    Estadual estadoMaiorAlta;
+    Estadual estadoMaiorBaixa;
+
+    for(auto estado: nacionalObj.getEstados()){
+        int ultimoElemento = estado.getSerieMediaMovel().size() -1;
+        float status = estado.getSerieMediaMovel()[ultimoElemento] / estado.getSerieMediaMovel()[ultimoElemento - 1];
+    
+        if (status > maiorAlta){
+            estadoMaiorAlta = estado;
+            maiorAlta = status;
+        }
+
+        if (status < maiorBaixa){
+            estadoMaiorBaixa = estado;
+            maiorBaixa = status;
+        }
+    }
+
+    cout << "\nEstado com maior alta: " << estadoMaiorAlta.getNome() << endl;
+    cout << "\nEstado com maior baixa: " << estadoMaiorBaixa.getNome() << endl;
 }

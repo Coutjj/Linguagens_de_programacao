@@ -41,6 +41,7 @@ class Relatorio
         void printRelatorioNacional();
         void printStatusEstados();
         void printStatusBrasil();
+        void printEstadoMaiorAltaBaixa();
 };
 
 
