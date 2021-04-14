@@ -43,7 +43,8 @@ int main(){
 		cout << "(1) - Evolucao do numero de obitos." << endl;
 	  	cout << "(2) - Status dos Estados" << endl;
 	  	cout << "(3) - Status Brasil" << endl;
-		cout << "(4) - Estado com maior Alta/Baixa\n\n";
+		cout << "(4) - Estado com maior Alta/Baixa" << endl;
+		cout << "(5) - Numero acumulado de Obitos\n\n";
 
 		cin >> escolhaUsuarioMenu;
 
@@ -63,6 +64,9 @@ int main(){
 				break;
 			case 4:
 				relatorioBrasil.printEstadoMaiorAltaBaixa();
+				break;
+			case 5:
+				relatorioBrasil.printObitosAcumulados();
 				break;
 			default:
 				cout << "\nOpcao invalida - digite 0 (zero) para sair" << endl;

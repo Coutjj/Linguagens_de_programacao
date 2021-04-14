@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <numeric>
 
 using namespace std;
 
@@ -173,7 +174,7 @@ void Relatorio::printStatusBrasil(){
 
     float limiar = 1.15;
 
-    cout << "\nStatus Brasil: ";
+    cout << "\nStatus " << nacionalObj.getNome() << ": ";
     if (status > limiar){
         cout << "Alta\n";
     }
@@ -210,4 +211,20 @@ void Relatorio::printEstadoMaiorAltaBaixa(){
 
     cout << "\nEstado com maior alta: " << estadoMaiorAlta.getNome() << endl;
     cout << "\nEstado com maior baixa: " << estadoMaiorBaixa.getNome() << endl;
+}
+
+void Relatorio::printObitosAcumulados(){
+
+    int acumuladoBrasil = 0;
+    cout << "\nObitos acumulados:\n\n";
+
+    for(auto estado: nacionalObj.getEstados()){
+        cout << estado.getNome() << ": ";
+        vector<int> serieObitos = estado.getSerieObitos();
+        acumuladoBrasil += accumulate(serieObitos.begin(), serieObitos.end(), 0);
+        cout << accumulate(serieObitos.begin(), serieObitos.end(), 0) << endl << endl;
+
+    } 
+
+    cout << "Acumulado " << nacionalObj.getNome() << ": " << acumuladoBrasil << endl;
 }

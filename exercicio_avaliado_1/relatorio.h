@@ -42,6 +42,7 @@ class Relatorio
         void printStatusEstados();
         void printStatusBrasil();
         void printEstadoMaiorAltaBaixa();
+        void printObitosAcumulados();
 };
 
 
