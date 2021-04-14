@@ -41,8 +41,8 @@ int main(){
 
 		cout << "\nEscolha uma das opcoes abaixo ou selecione 0 (zero) para sair.\n\n";
 		cout << "(1) - Evolucao do numero de obitos." << endl;
-	  	cout << "(2) - Classificacao dos Estados" << endl;
-	  	cout << "(3) - Classificacao dos Estados brasileiros\n\n";
+	  	cout << "(2) - Status dos Estados" << endl;
+	  	cout << "(3) - Status Brasil\n\n";
 
 		cin >> escolhaUsuarioMenu;
 
@@ -58,7 +58,7 @@ int main(){
 				relatorioBrasil.printStatusEstados();
 				break;
 			case 3:
-				cout << "Classificacao dos Estados brasileiros" << endl;
+				relatorioBrasil.printStatusBrasil();
 				break;
 			default:
 				cout << "Opcao invalida - digite 0 (zero) para sair" << endl;

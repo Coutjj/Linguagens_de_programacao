@@ -77,7 +77,6 @@ void Relatorio::printRelatorioNacional(){
         cout << endl << endl;
     }
 
-    cout << endl;
 }
 
 vector<float> Relatorio::calcMedia(Estadual estadoObj){
@@ -164,6 +163,26 @@ void Relatorio::printStatusEstados(){
     cout << "\nEstados em equilibrio:\n\n";
     for (auto estado: estadosEstavel){
         cout << estado.getNome() << endl;
+    }
+
+}
+
+void Relatorio::printStatusBrasil(){
+
+    int ultimoElemento = nacionalObj.getSerieMediaMovel().size() - 1;
+    float status = nacionalObj.getSerieMediaMovel()[ultimoElemento] / nacionalObj.getSerieMediaMovel()[ultimoElemento -1];
+
+    float limiar = 1.15;
+
+    cout << "\nStatus Brasil: ";
+    if (status > limiar){
+        cout << "Alta\n";
+    }
+    else if(status < (2 - limiar)){
+        cout << "Baixa\n";
+    }
+    else{
+        cout << "Estavel\n";
     }
 
 }

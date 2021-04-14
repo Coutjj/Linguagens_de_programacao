@@ -40,6 +40,7 @@ class Relatorio
         void printRelatorio();
         void printRelatorioNacional();
         void printStatusEstados();
+        void printStatusBrasil();
 };
 
 
