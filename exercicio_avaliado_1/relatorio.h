@@ -24,7 +24,6 @@ using namespace std;
 class Relatorio
 {
     private:
-        vector<float> mediaMovel;
         Estadual estadoObjUnico;
         Nacional nacionalObj;
         int numDiasMedia;
@@ -38,10 +37,9 @@ class Relatorio
     public:
         Relatorio(Estadual, int);
         Relatorio(Nacional, int);
-        vector<float> getMediaMovel();
-        vector<float> getMediaMovelNacional();
         void printRelatorio();
         void printRelatorioNacional();
+        void printStatusEstados();
 };
 
 

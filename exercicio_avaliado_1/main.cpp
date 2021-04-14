@@ -21,8 +21,10 @@ using namespace std;
 int main(){
 
 	Estadual rio("Rio de Janeiro", {2, 7, 11, 21, 2, 20, 70, 80, 90});
-	Estadual saoPaulo ("Sao Paulo", {2, 7, 11, 21, 2, 20, 70, 80, 90});
-	Nacional brasil("Brasil", {rio, saoPaulo});
+	Estadual saoPaulo ("Sao Paulo", {2, 7, 11, 21, 2, 20, 5, 2, 10});
+	Estadual minas("Minas Gerais", {2, 6, 7, 1, 8, 9, 1, 8, 9});
+
+	Nacional brasil("Brasil", {rio, saoPaulo, minas});
 	int diasMediaMovel;
 
 	cout << "\nBem-vindo(a) ao relatorio da pandemia de COVID-19." << endl;
@@ -53,7 +55,7 @@ int main(){
 				relatorioBrasil.printRelatorioNacional();
 				break;
 			case 2:
-				cout << "Classificacao dos Estados" << endl;
+				relatorioBrasil.printStatusEstados();
 				break;
 			case 3:
 				cout << "Classificacao dos Estados brasileiros" << endl;
