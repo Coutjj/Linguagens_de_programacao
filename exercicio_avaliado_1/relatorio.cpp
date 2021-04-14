@@ -1,3 +1,16 @@
+/*
+  *  Universidade Federal do Rio de Janeiro
+  *  Escola Politecnica
+  *  Departamento de Eletronica e de Computacao
+  *  EEL770 - Linguagens de Programação - Turma 2020/2
+  *  Prof: Miguel Elias Mitre Campista
+  *  Autor: Juan Coutinho Lima
+  * 
+  * Avaliacao 1. Programa para gerar relatorio sobre a pandemia de COVID-19
+  * Definicoes da classe Relatorio. Esta classe concentra todos os metodos e atributos 
+  * necessarios para a geracao das informacoes estabelecidas no menu principal.
+*/
+
 #include "relatorio.h"
 #include <vector>
 #include <iostream>
@@ -30,20 +43,20 @@ void Relatorio::setMediaMovel(Estadual estadoObj){
     Relatorio::estadoObjUnico.setSerieMediaMovel(calcMedia(estadoObj));
 }
 
+//checando se usuario atribuiu uma entrada valida
 void Relatorio::setNumDiasMedia(int numDiasMediaInput){
 
     if(numDiasMediaInput <= 0){
-        cout << "Numero invalido para o calculo da media\n" << "Os calculos considerarao N = 3.";
+        cout << "\nNumero invalido para o calculo da media\n" << "Os calculos considerarao N = 3.\n";
             Relatorio::numDiasMedia = 3;
     }
     else if(numDiasMediaInput < 3){
-        cout << "O numero de dias para media deve ser >= 3.\n" << "Os calculos considerarao N = 3.";
+        cout << "\nO numero de dias para media deve ser >= 3.\n" << "Os calculos considerarao N = 3.\n";
         Relatorio::numDiasMedia = 3;
     }
     else{
         Relatorio::numDiasMedia = numDiasMediaInput;
     }
-
 
 }
 
@@ -99,7 +112,7 @@ vector<float> Relatorio::calcMedia(Estadual estadoObj){
 
         index--;
     }
-
+    //invertendo o vetor, pois o calculo anterior retorna uma vetor invertido
     reverse(mediaMovelCalc.begin(), mediaMovelCalc.end());
     return mediaMovelCalc;
 }
@@ -115,6 +128,8 @@ void Relatorio::setMediaMovelNacional(){
         mediasEstaduais.push_back(estadosCalculados[index].getSerieMediaMovel());
     }
 
+    /*para que haja "persistencia" dos dados, o objeto nacional precisa receber a atribuicao
+     dos novos valores. As funcoes de retorno get devolvem apenas a copia do objeto original*/
     Nacional nacionalCalculado(nacionalObj.getNome(), estadosCalculados);
     setNacional(nacionalCalculado);
     
@@ -167,7 +182,7 @@ void Relatorio::printStatusEstados(){
 
 }
 
-void Relatorio::printStatusBrasil(){
+void Relatorio::printStatusNacao(){
 
     int ultimoElemento = nacionalObj.getSerieMediaMovel().size() - 1;
     float status = nacionalObj.getSerieMediaMovel()[ultimoElemento] / nacionalObj.getSerieMediaMovel()[ultimoElemento -1];

@@ -11,6 +11,7 @@
   * alem de fornecer metodos para que estas informacoes sejam acessadas e configuradas.
 */
 
+
 #ifndef ESTADUAL_H
 #define ESTADUAL_H
 
@@ -23,8 +24,8 @@ class Estadual
 {
     private:
         string nome;
-        vector <int> serieObitos;
-        vector<float> serieMediaMovel;
+        vector <int> serieObitos; //serie hiostorica de obitos
+        vector<float> serieMediaMovel; // serie historica da media movel
     public:
 
         Estadual(string nome, vector <int> serieObitos);

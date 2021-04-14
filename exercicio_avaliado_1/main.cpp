@@ -12,26 +12,53 @@
 
 
 #include <iostream>
+#include <vector>
+#include <random>
 #include "estadual.h"
 #include "relatorio.h"
 #include "nacional.h"
 
 using namespace std;
 
+//funcao para gerar serie historica de obitos
+vector<int> vetorObitosAleatorio(){
+	int numeroObitos = 15;
+	int min = 0;
+	int max = 1000;
+
+	random_device rd;
+	default_random_engine eng(rd());
+	uniform_int_distribution<int> distr(min, max);
+
+	vector<int> vetorObitos;
+	for (int index = 0; index < numeroObitos; index++){
+		vetorObitos.push_back(distr(eng));
+	}
+
+	return vetorObitos;
+}
+
 int main(){
 
-	Estadual rio("Rio de Janeiro", {2, 7, 11, 21, 2, 20, 70, 80, 90});
-	Estadual saoPaulo ("Sao Paulo", {2, 7, 11, 21, 2, 20, 5, 2, 10});
-	Estadual minas("Minas Gerais", {2, 6, 7, 1, 8, 9, 1, 8, 9});
+	Estadual rio("Rio de Janeiro", vetorObitosAleatorio());
+	Estadual saoPaulo ("Sao Paulo", vetorObitosAleatorio());
+	Estadual minas("Minas Gerais", vetorObitosAleatorio());
+	Estadual espiritoSanto("Espirito Santo", vetorObitosAleatorio());
 
-	Nacional brasil("Brasil", {rio, saoPaulo, minas});
+	Nacional brasil("Brasil", {rio, saoPaulo, minas, espiritoSanto});
 	int diasMediaMovel;
 
 	cout << "\nBem-vindo(a) ao relatorio da pandemia de COVID-19." << endl;
 	cout << "Escolha o numero N de dias para a media movel\n\n";
 
 	cin >> diasMediaMovel;
-	//Relatorio relatorioRio(rio, diasMediaMovel);
+
+	if (cin.fail()){
+		cout << "\nPrograma abortado\n";
+		return -1;
+	}
+
+	//Relatorio relatorioRio(rio, diasMediaMovel); //exemplo sobrecarga para estado
 	//Relatorio relatorioSP(saoPaulo, diasMediaMovel);
 	Relatorio relatorioBrasil(brasil, diasMediaMovel);
 
@@ -48,6 +75,11 @@ int main(){
 
 		cin >> escolhaUsuarioMenu;
 
+		if (cin.fail()){
+			cout << "\nPrograma abortado\n";
+			return -1;
+		}
+
 		switch (escolhaUsuarioMenu)
 		{
 			case 0:
@@ -60,7 +92,7 @@ int main(){
 				relatorioBrasil.printStatusEstados();
 				break;
 			case 3:
-				relatorioBrasil.printStatusBrasil();
+				relatorioBrasil.printStatusNacao();
 				break;
 			case 4:
 				relatorioBrasil.printEstadoMaiorAltaBaixa();
@@ -69,7 +101,7 @@ int main(){
 				relatorioBrasil.printObitosAcumulados();
 				break;
 			default:
-				cout << "\nOpcao invalida - digite 0 (zero) para sair" << endl;
+				cout << "\nOpcao invalida - digite 0 (zero) para sair ou escolha uma opcao valida\n";
 		}
 	}
 
