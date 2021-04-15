@@ -14,7 +14,7 @@ Avaliacao 1. Programa para gerar relatório sobre a pandemia de COVID-19
     
     $ make all
 
-    Apos essa acao o programa pode ser executado no terminal atraves do seguinte comando:
+    Apos essa ação o programa pode ser executado no terminal através do seguinte comando:
 
     $ ./exec 
 
@@ -32,10 +32,10 @@ Avaliacao 1. Programa para gerar relatório sobre a pandemia de COVID-19
     
     exemplo:
         Considerando que a serie historica de obitos consiste num vetor de 15 elementos,
-        gerados randomicamente, e que o usario escolheu a primeira entrada como 7, teremos uma
+        gerados randomicamente, e que o usuário escolheu a primeira entrada como 7, teremos uma
         série histórica de média móvel com apenas 2 elementos.
 
-    A seguir o programa solicita uma entrada com opcoes que estao na mesma sequencia das solicitadas
+    A seguir, o programa solicita como entrada as seguintes opções, que estão na mesma sequência das solicitadas
     na folha de questões.
 
         (1) Exibe a série histórica da média móvel para o Brasil de acordo com estados cadastrados estaticamente.
