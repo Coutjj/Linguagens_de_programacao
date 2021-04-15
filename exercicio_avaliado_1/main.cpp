@@ -49,7 +49,7 @@ int main(){
 	int diasMediaMovel;
 
 	cout << "\nBem-vindo(a) ao relatorio da pandemia de COVID-19." << endl;
-	cout << "Escolha o numero N de dias para a media movel\n\n";
+	cout << "Escolha o numero N de dias para o range da media movel\n\n";
 
 	cin >> diasMediaMovel;
 

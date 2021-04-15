@@ -24,7 +24,7 @@ class Estadual
 {
     private:
         string nome;
-        vector <int> serieObitos; //serie hiostorica de obitos
+        vector <int> serieObitos; //serie historica de obitos
         vector<float> serieMediaMovel; // serie historica da media movel
     public:
 

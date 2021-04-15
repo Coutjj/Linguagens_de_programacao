@@ -1,0 +1,47 @@
+Universidade Federal do Rio de Janeiro
+Escola Politecnica
+Departamento de Eletronica e de Computacao
+EEL770 - Linguagens de Programação - Turma 2020/2
+Prof: Miguel Elias Mitre Campista
+Autor: Juan Coutinho Lima
+
+Avaliacao 1. Programa para gerar relatório sobre a pandemia de COVID-19
+
+## Indicação para compilação e execução:
+    
+    Para compilar o programa, basta acessar o diretorio contendo o arquivo Makefile e no terminal
+    executar o seguinte comando:
+    
+    $ make all
+
+    Apos essa acao o programa pode ser executado no terminal atraves do seguinte comando:
+
+    $ ./exec 
+
+    O programa pode ser opcionalmente compilado e linkeditado da seguinte maneira:
+
+    $ g++ -Wall -o exec nacional.cpp estadual.cpp relatorio.cpp main.cpp
+
+    É recomendado que antes de uma segunda compilacao o seguinte comando seja executado:
+
+    $ make clean
+
+## Como utilizar:
+    A primeira entrada que o programa solicita é o range que será utilizado para o calculo da
+    média movel. 
+    
+    exemplo:
+        Considerando que a serie historica de obitos consiste num vetor de 15 elementos,
+        gerados randomicamente, e que o usario escolheu a primeira entrada como 7, teremos uma
+        série histórica de média móvel com apenas 2 elementos.
+
+    A seguir o programa solicita uma entrada com opcoes que estao na mesma sequencia das solicitadas
+    na folha de questões.
+
+        (1) Exibe a série histórica da média móvel para o Brasil de acordo com estados cadastrados estaticamente.
+        (2) Agrupa os estados de acordo com o status (Alta/Baixa/Equilibrio) de acordo com a sua série histórica.
+        (3) Classifica o Brasil como em (Alta/Baixa/Estavel) de acordo com sua série histórica.
+        (4) Exibe o estado com maior alta e com maior baixa.
+        (5) Exibe o numero acumulado de obitos para o Brasil e os estados cadastrados.
+
+    Para finalizar o programa bastar inserir 0 (zero).
