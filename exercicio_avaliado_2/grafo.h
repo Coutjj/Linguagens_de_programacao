@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "vertice.h"
+#include "aresta.h"
 
 using namespace std;
 
@@ -12,12 +13,12 @@ class Grafo
     private:
         vector<Vertice> vertices;
         vector<string> palavras;
+        vector<Aresta> arestas;
     public:
         Grafo(string ); // string nome_arquivo
-        void lerArquivo(string );
         int retornarRecorrencia(string );
-        vector<string> cortarString(string);
         void montarVertices();
+        void montarArestas();
     
 };
 

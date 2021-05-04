@@ -2,36 +2,17 @@
 #include <fstream>
 #include <algorithm>
 #include "grafo.h"
+#include "texto.h"
 
 using namespace std;
 
 Grafo::Grafo(string nomeArquivo){
-
-    lerArquivo(nomeArquivo);
+    Texto texto(nomeArquivo);
+    palavras = texto.getPalavras();
     montarVertices();
+    montarArestas();
 }
 
-void Grafo::lerArquivo(string nomeArquivo){
-
-    fstream input;
-    input.open(nomeArquivo, ios::in);
-    string linha;
-    string conteudoArquivo;
-
-    if(input.is_open()){
-        while ( getline(input, linha))
-        {
-            transform(linha.begin(), linha.end(), linha.begin(), ::tolower);
-            conteudoArquivo.append(linha.append(" "));
-            
-        }      
-    }
-
-    
-    palavras = cortarString(conteudoArquivo);
-    
-    input.close();
-}
 
 int Grafo::retornarRecorrencia(string palavra){
 
@@ -47,37 +28,33 @@ int Grafo::retornarRecorrencia(string palavra){
 
 }
 
+void Grafo::montarArestas(){
+    for(int index = 0; index < int(palavras.size()); index++ ){
+        string palavraAnterior;
+        string proximaPalavra;
 
-vector<string> Grafo::cortarString(string stringCompleta){
-    char vazio = ' ';
-    string palavra;
-    vector<string> vetorPalavras;
-    
-    char stringVazia[] = {' ', '\0'};
-
-    for(char letra: stringCompleta){
+        if (palavras[index] != "." && palavras[index] != "," && palavras[index] != ";"){
+        palavraAnterior = palavras[index];
+        }
         
-        if(letra == vazio || letra == '.' || letra == ','){
-            
-            
-            if(palavra != ""){
-                vetorPalavras.push_back(palavra);
-            }
-            if (letra != vazio){
-                stringVazia[0] = letra;
-                vetorPalavras.push_back(stringVazia);
-            }
+        if ((index + 1) < int(palavras.size())){
+            proximaPalavra = palavras[index + 1];
 
-            palavra = "";
+            if (proximaPalavra != "." && proximaPalavra != "," && proximaPalavra != ";"){
+                Vertice verticeAnterior;
+                Vertice proximoVertice;
+                verticeAnterior.setPalavra(palavraAnterior);
+                proximoVertice.setPalavra(proximaPalavra);
+
+                Aresta aresta(verticeAnterior, proximoVertice);
+
+                cout << aresta.getVerticeAnterior().getPalavra() << endl;
+                cout << aresta.getverticeSeguinte().getPalavra() << endl;    
+            }
         }
-        else{
-            stringVazia[0] = letra;
-            palavra.append(stringVazia);
-        }
+        
+
     }
-
-    return vetorPalavras;
-
 }
 
 void Grafo::montarVertices(){
@@ -87,7 +64,7 @@ void Grafo::montarVertices(){
         vertice.setPalavra(palavra);
         vertice.setRecorrencia(retornarRecorrencia(palavra));
         vertices.push_back(vertice);
-        cout << vertice.getPalavra() << endl;
+        //cout << vertice.getPalavra() << endl;
     }    
 
 }
