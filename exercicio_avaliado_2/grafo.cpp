@@ -53,11 +53,14 @@ void Grafo::montarArestas(){
                 proximoVertice.setPalavra(proximaPalavra);
                 proximoVertice.setRecorrencia(retornarRecorrencia(proximaPalavra));
 
-                Aresta aresta(verticeAnterior, proximoVertice); 
+                Aresta aresta(verticeAnterior, proximoVertice);
+                arestas.push_back(aresta);
             }
         }
-        
+    }
 
+    for(int index = 0; index < int(arestas.size()); index++){
+        arestas[index].setRecorrencia(recorrenciaAresta(arestas[index]));
     }
 }
 
@@ -119,4 +122,59 @@ void Grafo::palavrasMaisUtilizadas(){
         }
     } 
 
+}
+
+int Grafo::recorrenciaAresta(Aresta arestaInput){
+
+    int recorrencia = 0;
+    for (int index = 0; index < int(arestas.size()); index++){
+        if(arestaInput.CompararVertices(arestas[index]) == true){
+            recorrencia++;
+        }
+    }
+    return recorrencia;
+}
+
+
+void Grafo::sequenciade2Termos(){
+
+    int maiorRecorrencia = 0;
+    
+    for (int index = 0; index < int(arestas.size()); index++){
+        if(arestas[index].getRecorrencia() > maiorRecorrencia){
+            maiorRecorrencia = arestas[index].getRecorrencia();
+        }
+    }
+
+    //lista todas as palavras com mesma recorrencia
+    vector<Aresta> arestasMaiorRecorrencia;
+    bool arestaJaexiste = 0;
+    for(auto aresta: arestas){
+        if(aresta.getRecorrencia() == maiorRecorrencia){
+            
+            for(auto arestasListadas: arestasMaiorRecorrencia){
+                if(aresta.getVerticeAnterior().getPalavra() == arestasListadas.getVerticeAnterior().getPalavra()){
+                    if(aresta.getverticeSeguinte().getPalavra() == arestasListadas.getverticeSeguinte().getPalavra()){
+                        arestaJaexiste = true;
+                    }
+                }
+            }
+            
+            if(arestaJaexiste == false){
+                arestasMaiorRecorrencia.push_back(aresta);
+            }
+
+            arestaJaexiste = false;
+            
+        }
+    }
+
+    cout << "Sequencia de duas palavras com maior recorrencia:\n\n";
+
+    for(auto aresta: arestasMaiorRecorrencia){
+        cout << aresta.getVerticeAnterior().getPalavra()
+            << " - " << aresta.getverticeSeguinte().getPalavra()
+            << "\nRecorrencia: " << aresta.getRecorrencia() << "\n\n";
+    }
+    
 }

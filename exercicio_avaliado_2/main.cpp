@@ -43,7 +43,7 @@ int main(){
                 grafoTexto.palavrasMaisUtilizadas();
                 break;
             case 2:
-                cout << "2 escolhido" << endl;
+                grafoTexto.sequenciade2Termos();
                 break;
             case 3:
                 cout << "3 escolhido" << endl;

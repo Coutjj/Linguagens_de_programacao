@@ -16,6 +16,7 @@ public:
     int getRecorrencia();
     Vertice getVerticeAnterior();
     Vertice getverticeSeguinte();
+    bool CompararVertices(Aresta );
 };
 
 

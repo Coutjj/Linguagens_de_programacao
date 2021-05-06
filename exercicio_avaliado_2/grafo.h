@@ -18,9 +18,11 @@ class Grafo
     public:
         Grafo(string ); // string nome_arquivo
         int retornarRecorrencia(string );
+        int recorrenciaAresta(Aresta );
         void montarVertices();
         void montarArestas();
         void palavrasMaisUtilizadas();
+        void sequenciade2Termos();
     
 };
 
