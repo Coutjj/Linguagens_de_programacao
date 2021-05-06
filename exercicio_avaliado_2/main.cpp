@@ -23,11 +23,11 @@ int main(){
 
     
     while(escolhaUsuario == 0){
-        cout << "\nEscolha uma das opcoes abaixo" << endl;
+        cout << "\nEscolha uma das opcoes abaixo ou digite 0 (zero) para sair:\n" << endl;
         cout << "(1) Palavras mais utilizadas no texto" << endl;
         cout << "(2) Sequencia de duas palavras mais utilizadas" << endl;
         cout << "(3) Sequencia de N palavras" << endl;
-        cout << "(0) Ou digite 0 (zero) para sair" << endl;
+        cout << "(0) Ou digite 0 (zero) para sair\n\n";
 
         cin >> escolhaUsuario;
 
@@ -39,19 +39,21 @@ int main(){
 
         switch (escolhaUsuario)
         {
-        case 1:
-            grafoTexto.palavrasMaisUtilizadas();
-            break;
-        case 2:
-            cout << "2 escolhido" << endl;
-            break;
-        case 3:
-            cout << "3 escolhido" << endl;
-            break;
-        case 0:
-            exit(0);
-        default:
-            break;
+            case 1:
+                grafoTexto.palavrasMaisUtilizadas();
+                break;
+            case 2:
+                cout << "2 escolhido" << endl;
+                break;
+            case 3:
+                cout << "3 escolhido" << endl;
+                break;
+            case 0:
+                exit(0);
+            default:
+                break;
         }
+
+        escolhaUsuario = 0;
     }
 }

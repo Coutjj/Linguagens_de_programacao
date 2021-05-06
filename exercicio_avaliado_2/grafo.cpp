@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <algorithm>
 #include "grafo.h"
@@ -52,11 +53,7 @@ void Grafo::montarArestas(){
                 proximoVertice.setPalavra(proximaPalavra);
                 proximoVertice.setRecorrencia(retornarRecorrencia(proximaPalavra));
 
-                Aresta aresta(verticeAnterior, proximoVertice);
-
-                cout << aresta.getVerticeAnterior().getPalavra() << endl;
-                cout << aresta.getVerticeAnterior().getRecorrencia();
-                cout << aresta.getverticeSeguinte().getPalavra() << endl;    
+                Aresta aresta(verticeAnterior, proximoVertice); 
             }
         }
         
@@ -112,8 +109,14 @@ void Grafo::palavrasMaisUtilizadas(){
 
     palavrasMaisUtilizadas = copia;
 
+    cout << "\nPalavras com recorrencia maior que 1:\n\n"
+         << setw(20) << left << "Palavra"  << "\tRecorrencia\n\n";
+
     for(Vertice vertice: palavrasMaisUtilizadas){
-        cout << '[' << vertice.getPalavra() << "] " << vertice.getRecorrencia() << endl;
+        if(vertice.getRecorrencia() > 1){
+            cout << setw(20) << left << vertice.getPalavra() << "\t"
+                 << setw(20) << left << vertice.getRecorrencia() << endl;
+        }
     } 
 
 }
