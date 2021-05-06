@@ -40,7 +40,7 @@ int main(){
         switch (escolhaUsuario)
         {
         case 1:
-            cout << "1 escolhido" << endl;
+            grafoTexto.palavrasMaisUtilizadas();
             break;
         case 2:
             cout << "2 escolhido" << endl;
