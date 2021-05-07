@@ -27,7 +27,7 @@ class Grafo
         vector<Vertice> vertices; //modela todo o conjunto de vertices
         vector<string> palavras; //recebe todas as palavras do texto
         vector<Aresta> arestas; //modela o conjunto de todas as arestas
-        vector<string> caracteres = {".\0", ",\0", ";\0", "-\0"}; //caracteres considerados para quebra de sequencia
+        vector<string> caracteres = {".\0", ",\0", ";\0"}; //caracteres considerados para quebra de sequencia
         string stringTexto; //recebe o texto formatado em uma string
     public:
         Grafo(string ); // string nome_arquivo
