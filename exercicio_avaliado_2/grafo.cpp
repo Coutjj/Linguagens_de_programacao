@@ -285,18 +285,40 @@ void Grafo::sequenciadeNTermos(){
 
     int recorrenciaSequencia = 0;
     map<string, int> sequenciasMaisUtilizadas;
-    for(auto frase1: listaGrupoPalavras){
-        for(auto frase2: listaGrupoPalavras){
-            if(frase1 == frase2){
-                recorrenciaSequencia++;
-            }
-            cout << "[" << frase1 << "]" << "[" << frase2 << "]";
-            cout << recorrenciaSequencia << endl;
-        }
 
-        sequenciasMaisUtilizadas.insert(make_pair(frase1, recorrenciaSequencia));
-        recorrenciaSequencia = 0;
+    
+
+    vector<string> copia;
+    for(auto frase: listaGrupoPalavras){
+        //frase[frase.size() - 1] = '\0';
+        if (frase[frase.size() - 1] == '\0' && frase[frase.size() - 2] == '\0'){
+            frase = frase.substr(0, (frase.size() - 1));
+        }
+        copia.push_back(frase);
+        cout << "[" << frase << "]" << frase.size()<< endl;
     }
+    listaGrupoPalavras = copia;
+
+    for (int index = 0; index < int(listaGrupoPalavras.size()); index++){
+        if(sequenciasMaisUtilizadas.find(listaGrupoPalavras[index]) == sequenciasMaisUtilizadas.end()){
+            sequenciasMaisUtilizadas[listaGrupoPalavras[index]] = 1;
+        }
+        else{
+            sequenciasMaisUtilizadas[listaGrupoPalavras[index]]++;
+        }
+    }
+
+    // for(auto frase1: listaGrupoPalavras){
+    //     for(auto frase2: listaGrupoPalavras){
+    //         if(frase1 == frase2){
+    //             recorrenciaSequencia++;
+    //         }
+    //         //cout << "[" << frase1 << "]" << "[" << frase2 << "]";
+    //         //cout << recorrenciaSequencia << endl;
+    //     }
+
+    //     sequenciasMaisUtilizadas.insert(make_pair(frase1, recorrenciaSequencia));
+    // }
 
     cout << sequenciasMaisUtilizadas.size()<< endl;
     for(auto mapIt = sequenciasMaisUtilizadas.begin(); mapIt != sequenciasMaisUtilizadas.end(); mapIt++){
