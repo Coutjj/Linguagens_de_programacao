@@ -22,6 +22,7 @@ Vertice Aresta::getverticeSeguinte(){
     return verticeSeguinte;
 }
 
+//retorna se duas arestas sao iguais
 bool Aresta::CompararVertices(Aresta arestaInput){
     if(arestaInput.getVerticeAnterior().getPalavra() == this->verticeAnterior.getPalavra()){
         if(arestaInput.getverticeSeguinte().getPalavra() == this->verticeSeguinte.getPalavra()){

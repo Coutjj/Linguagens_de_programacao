@@ -21,7 +21,6 @@ string Texto::lerArquivo(string nomeArquivo){
         {
             transform(linha.begin(), linha.end(), linha.begin(), ::tolower);
             conteudoArquivo.append(linha.append(" "));
-            
         }      
     }
 
@@ -38,8 +37,7 @@ vector<string> Texto::cortarString(string stringCompleta){
 
     for(char letra: stringCompleta){
         
-        if(letra == vazio || letra == '.' || letra == ','){
-            
+        if(letra == vazio || letra == '.' || letra == ',' || letra == ';'){
             
             if(palavra != ""){
                 vetorPalavras.push_back(palavra);
@@ -58,7 +56,6 @@ vector<string> Texto::cortarString(string stringCompleta){
     }
 
     return vetorPalavras;
-
 }
 
 vector<string> Texto::getPalavras(){

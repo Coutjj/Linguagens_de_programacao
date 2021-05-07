@@ -24,10 +24,9 @@ int main(){
     
     while(escolhaUsuario == 0){
         cout << "\nEscolha uma das opcoes abaixo ou digite 0 (zero) para sair:\n" << endl;
-        cout << "(1) Palavras mais utilizadas no texto" << endl;
-        cout << "(2) Sequencia de duas palavras mais utilizadas" << endl;
-        cout << "(3) Sequencia de N palavras" << endl;
-        cout << "(0) Ou digite 0 (zero) para sair\n\n";
+        cout << "(1) Palavras mais utilizadas no texto." << endl;
+        cout << "(2) Sequencia de duas palavras mais utilizadas." << endl;
+        cout << "(3) Sequencia de N palavras.\n\n";
 
         cin >> escolhaUsuario;
 

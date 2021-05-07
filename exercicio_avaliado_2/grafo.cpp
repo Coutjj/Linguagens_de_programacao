@@ -1,3 +1,16 @@
+/*
+  
+  *  Universidade Federal do Rio de Janeiro
+  *  Escola Politecnica
+  *  Departamento de Eletronica e de Computacao
+  *  EEL770 - Linguagens de Programação - Turma 2020/2
+  *  Prof: Miguel Elias Mitre Campista
+  *  Autor: Juan Coutinho Lima
+  * 
+  * classe que modela um grafo. Possibilita encontrar recorrencia de vertices e arestas e o
+  * numero N de termos consecutivos mais utilizados.
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -30,16 +43,15 @@ int Grafo::retornarRecorrencia(string palavra){
     }
 
     return contadorPalavra;
-
 }
 
 void Grafo::montarArestas(){
     string palavraAnterior;
     string proximaPalavra;
-    
+    //itera sobre o vetor de palavras e monta as arestas
     for(int index = 0; index < int(palavras.size()); index++ ){
-
-        if (palavras[index] != "." && palavras[index] != "," && palavras[index] != ";"){
+        //verifica se a sequencia de palavras e valida (sem pontuacao entre a sequencia)
+        if(find(begin(caracteres), end(caracteres), palavras[index]) == end(caracteres)){
             palavraAnterior = palavras[index];
         }
         else{
@@ -48,8 +60,7 @@ void Grafo::montarArestas(){
         
         if ((index + 1) < int(palavras.size())){
             proximaPalavra = palavras[index + 1];
-
-            if (proximaPalavra != "." && proximaPalavra != "," && proximaPalavra != ";"){
+            if(find(begin(caracteres), end(caracteres), proximaPalavra) == end(caracteres)){
                 Vertice verticeAnterior;
                 Vertice proximoVertice;
                 verticeAnterior.setPalavra(palavraAnterior);
@@ -62,7 +73,7 @@ void Grafo::montarArestas(){
             }
         }
     }
-
+    //define a recorrencia de cada aresta
     for(int index = 0; index < int(arestas.size()); index++){
         arestas[index].setRecorrencia(recorrenciaAresta(arestas[index]));
     }
@@ -70,21 +81,20 @@ void Grafo::montarArestas(){
 
 void Grafo::montarVertices(){
     Vertice vertice;
-
+    //monta um vertice pra cada palavra valida
     for(string palavra: palavras){
         if(find(begin(caracteres), end(caracteres), palavra) == end(caracteres)){
             vertice.setPalavra(palavra);
             vertice.setRecorrencia(retornarRecorrencia(palavra));
             vertices.push_back(vertice);
         }
-
     }    
-
 }
 
 void Grafo::palavrasMaisUtilizadas(){
 
     vector<Vertice> palavrasMaisUtilizadas;
+    //organiza em ordem desc de recorrencia
     palavrasMaisUtilizadas = vertices; 
     sort(
         palavrasMaisUtilizadas.begin(),
@@ -92,8 +102,8 @@ void Grafo::palavrasMaisUtilizadas(){
         [](Vertice a, Vertice b){return a.getRecorrencia() > b.getRecorrencia();}
     );
     
-    // remover duplicatas
-
+    // remover duplicatas. So existe recorrencia > 1 se temos palavras repetidas
+    //as palavras repitidas sao removidas antes da exibicao
     vector<Vertice> copia;
     copia.push_back(palavrasMaisUtilizadas[0]);
     bool existe = false;
@@ -113,7 +123,7 @@ void Grafo::palavrasMaisUtilizadas(){
 
         existe = false;
     }
-
+    //vetor ordenado e sem duplicatas
     palavrasMaisUtilizadas = copia;
 
     cout << "\nPalavras com recorrencia maior que 1:\n\n"
@@ -125,7 +135,6 @@ void Grafo::palavrasMaisUtilizadas(){
                  << setw(20) << left << vertice.getRecorrencia() << endl;
         }
     } 
-
 }
 
 int Grafo::recorrenciaAresta(Aresta arestaInput){
@@ -143,7 +152,7 @@ int Grafo::recorrenciaAresta(Aresta arestaInput){
 void Grafo::sequenciade2Termos(){
 
     int maiorRecorrencia = 0;
-    
+    //obtem valor da maior ocorrencia
     for (int index = 0; index < int(arestas.size()); index++){
         if(arestas[index].getRecorrencia() > maiorRecorrencia){
             maiorRecorrencia = arestas[index].getRecorrencia();
@@ -152,41 +161,44 @@ void Grafo::sequenciade2Termos(){
 
     //lista todas as palavras com mesma recorrencia
     vector<Aresta> arestasMaiorRecorrencia;
-    bool arestaJaexiste = 0;
+    bool arestaJaExiste = 0;
     for(auto aresta: arestas){
         if(aresta.getRecorrencia() == maiorRecorrencia){
             
             for(auto arestasListadas: arestasMaiorRecorrencia){
                 if(aresta.getVerticeAnterior().getPalavra() == arestasListadas.getVerticeAnterior().getPalavra()){
                     if(aresta.getverticeSeguinte().getPalavra() == arestasListadas.getverticeSeguinte().getPalavra()){
-                        arestaJaexiste = true;
+                        arestaJaExiste = true;
                     }
                 }
             }
             
-            if(arestaJaexiste == false){
+            if(arestaJaExiste == false){
                 arestasMaiorRecorrencia.push_back(aresta);
             }
 
-            arestaJaexiste = false;
+            arestaJaExiste = false;
             
         }
     }
 
     cout << "Sequencia de duas palavras com maior recorrencia:\n\n";
-
+    cout << setw(30) << left << "Sequencia"
+        << "\tRecorrencia\n\n";
     for(auto aresta: arestasMaiorRecorrencia){
-        cout << aresta.getVerticeAnterior().getPalavra()
-            << " - " << aresta.getverticeSeguinte().getPalavra()
-            << "\nRecorrencia: " << aresta.getRecorrencia() << "\n\n";
+        string sequencia = aresta.getVerticeAnterior().getPalavra() + " - "
+        + aresta.getverticeSeguinte().getPalavra();
+        cout << setw(30) << left << sequencia << "\t"
+             << aresta.getRecorrencia() << "\n";
     }
     
 }
 
+
 void Grafo::sequenciadeNTermos(){
 
-    int nTermos;
-    cout << "\nSelecione o numero N de termos na sequencia:\n";
+    int nTermos; //numero de termos escolhidos
+    cout << "\nSelecione o numero N de termos na sequencia:\n\n";
     cin >> nTermos;
 
     if(cin.fail()){
@@ -195,7 +207,7 @@ void Grafo::sequenciadeNTermos(){
     }
 
 
-    //agrupando sentencas
+    //agrupando sentencas (separa todas as frases ate a pontuacao)
     vector<vector<Aresta>> listagrupoSentencas;
     vector<Aresta> grupoArestas;
     for(int index = 0; index < int(arestas.size()); index++){
@@ -222,19 +234,9 @@ void Grafo::sequenciadeNTermos(){
             grupoArestas.clear();
 
         }
-
     }
 
-    // for(auto arestas: listagrupoSentencas){
-    //     for(auto aresta: arestas){
-    //         cout << aresta.getVerticeAnterior().getPalavra()
-    //             << " - " << aresta.getverticeSeguinte().getPalavra() << " - ";
-    //     }
-
-    //     cout << "\n";
-    // }
-
-    //sentencas em texto
+    //organiza as sentencas obtidas anteriormente em strings
     vector<string> listaSentencas;
     string frase = "";
     for(auto arestas: listagrupoSentencas){
@@ -246,19 +248,21 @@ void Grafo::sequenciadeNTermos(){
         listaSentencas.push_back(frase);
     }
 
+    //organiza todas as sequencias possiveis de N termos em strings
     int numPalavras = 0; 
-    int contador = 0;
+    int contador = 0; //indica qual a palavra estou considerando
     string grupoPalavras = "";
     vector<string> listaGrupoPalavras;
     for (auto frase: listaSentencas){
-        istringstream iss(frase);
+        istringstream iss(frase); //util para separar string em palavras
         string lerIss;
-        while(iss){
+        while(iss){ //obtem a primeira palavra da sequencia de N termos
             iss >> lerIss;
             grupoPalavras = lerIss + " ";
             contador++;
             istringstream iss2(frase);
 
+            //alinha o segundo iterador para buscar os N-1 termos restantes
             int contWhileSacrificio = 0;
             while(contador - contWhileSacrificio > 0){
                 string stringSacrificio;
@@ -266,13 +270,12 @@ void Grafo::sequenciadeNTermos(){
                 contWhileSacrificio++;
             }
             numPalavras = 0;
-            while (iss2)
+            while (iss2) //busca os N-1 termos restantes
             {
                 numPalavras++;
                 iss2 >> lerIss;
                 grupoPalavras += lerIss + " ";
                 if((numPalavras == (nTermos - 1)) && iss2){
-                    //cout << grupoPalavras << "\n";
                     grupoPalavras[grupoPalavras.size() - 1] = '\0';
                     listaGrupoPalavras.push_back(grupoPalavras);
                     grupoPalavras = "";
@@ -283,75 +286,63 @@ void Grafo::sequenciadeNTermos(){
         contador = 0;
     }
 
-    int recorrenciaSequencia = 0;
-    map<string, int> sequenciasMaisUtilizadas;
+    map<string, int> sequenciasMaisUtilizadas; //mapeia string e recorrencia
 
-    
-
+    //verifica se a string possui terminacao '\0' correta
+    //deve ser checado antes da comparacao
     vector<string> copia;
     for(auto frase: listaGrupoPalavras){
-        //frase[frase.size() - 1] = '\0';
         if (frase[frase.size() - 1] == '\0' && frase[frase.size() - 2] == '\0'){
             frase = frase.substr(0, (frase.size() - 1));
         }
         copia.push_back(frase);
-        cout << "[" << frase << "]" << frase.size()<< endl;
     }
-    listaGrupoPalavras = copia;
+    listaGrupoPalavras = copia; //string com terminacao correta
 
+    //executa a busca para verificar as sequencias mais utilizadas
     for (int index = 0; index < int(listaGrupoPalavras.size()); index++){
         if(sequenciasMaisUtilizadas.find(listaGrupoPalavras[index]) == sequenciasMaisUtilizadas.end()){
             sequenciasMaisUtilizadas[listaGrupoPalavras[index]] = 1;
+            //se nao existe o termo no vetor a recorrencia eh 1
         }
         else{
             sequenciasMaisUtilizadas[listaGrupoPalavras[index]]++;
+            //caso o termo exista no vetor a recorrencia eh somada
+        }
+    }
+    //o map nao possui chaves duplicadas
+
+    //ordennando map por ordem de recorrencia usando vetor auxiliar
+    vector<pair<string, int>> copiaElementos;
+    //popula vetor auxiliar
+    for(auto &it: sequenciasMaisUtilizadas){
+        copiaElementos.push_back(it);
+    }
+
+    //define expressao de comparacao lambda
+    auto cmp = [](const auto &a, const auto &b){
+        return a.second > b.second;
+    };
+
+    //ordena o vetor por recorrencia
+    sort(copiaElementos.begin(), copiaElementos.end(), cmp);
+
+    cout << "\nSequencia de N palavras mais utilizadas no texto:\n\n";
+    cout << setw(30) << left << "Sequencia"
+        << "\tRecorrencia\n\n";
+    
+    bool existeRecorrencia = false;
+    for(auto &it: copiaElementos){
+        if(it.second > 1){
+            cout << setw(30) << left << it.first << "\t"
+                << setw(5) << left << it.second << endl;
+
+            existeRecorrencia = true;
         }
     }
 
-    // for(auto frase1: listaGrupoPalavras){
-    //     for(auto frase2: listaGrupoPalavras){
-    //         if(frase1 == frase2){
-    //             recorrenciaSequencia++;
-    //         }
-    //         //cout << "[" << frase1 << "]" << "[" << frase2 << "]";
-    //         //cout << recorrenciaSequencia << endl;
-    //     }
-
-    //     sequenciasMaisUtilizadas.insert(make_pair(frase1, recorrenciaSequencia));
-    // }
-
-    cout << sequenciasMaisUtilizadas.size()<< endl;
-    for(auto mapIt = sequenciasMaisUtilizadas.begin(); mapIt != sequenciasMaisUtilizadas.end(); mapIt++){
-        string sequencia = mapIt->first;
-        int recorrencia = mapIt->second;
-
-        cout << sequencia << " " << recorrencia << endl;
+    if(existeRecorrencia == false){
+        cout << "\nNao existe recorrencia com " << nTermos << " termos.\n";
     }
-
-    // for (auto frase: listaGrupoPalavras)
-    // {
-    //     cout << frase;
-    //     cout << endl;
-    // }
-
-
-    // for (auto frase: listaSentencas)
-    // {
-    //     for(auto palavra: frase){
-    //         cout << palavra;
-    //     }
-    //     cout << endl;
-    // }
-    
-    
-
-    // for(auto arestas: listagrupoPalavras){
-    //     for(auto aresta: arestas){
-    //         cout << aresta.getVerticeAnterior().getPalavra()
-    //             << " - " << aresta.getverticeSeguinte().getPalavra() << " - ";
-    //     }
-
-    //     cout << "\n";
-    // }
-
 }
+
