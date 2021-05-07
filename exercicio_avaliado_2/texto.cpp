@@ -5,6 +5,7 @@
 
 Texto::Texto(string nomeArquivo){
     string stringTexto = lerArquivo(nomeArquivo);
+    texto = stringTexto;
     palavras = cortarString(stringTexto);
 }
 
@@ -62,4 +63,8 @@ vector<string> Texto::cortarString(string stringCompleta){
 
 vector<string> Texto::getPalavras(){
     return palavras;
+}
+
+string Texto::getTexto(){
+    return texto;
 }

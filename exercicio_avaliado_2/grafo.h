@@ -15,6 +15,7 @@ class Grafo
         vector<string> palavras;
         vector<Aresta> arestas;
         vector<string> caracteres = {".\0", ",\0" ";\0"};
+        string stringTexto;
     public:
         Grafo(string ); // string nome_arquivo
         int retornarRecorrencia(string );
@@ -23,6 +24,7 @@ class Grafo
         void montarArestas();
         void palavrasMaisUtilizadas();
         void sequenciade2Termos();
+        void sequenciadeNTermos();
     
 };
 

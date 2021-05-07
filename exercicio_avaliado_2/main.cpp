@@ -46,7 +46,7 @@ int main(){
                 grafoTexto.sequenciade2Termos();
                 break;
             case 3:
-                cout << "3 escolhido" << endl;
+                grafoTexto.sequenciadeNTermos();
                 break;
             case 0:
                 exit(0);

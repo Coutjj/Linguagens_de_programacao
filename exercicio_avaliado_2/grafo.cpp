@@ -2,6 +2,9 @@
 #include <iomanip>
 #include <fstream>
 #include <algorithm>
+#include <sstream>
+#include <map>
+#include <string>
 #include "grafo.h"
 #include "texto.h"
 
@@ -10,6 +13,7 @@ using namespace std;
 Grafo::Grafo(string nomeArquivo){
     Texto texto(nomeArquivo);
     palavras = texto.getPalavras();
+    stringTexto = texto.getTexto();
     montarVertices();
     montarArestas();
 }
@@ -177,4 +181,155 @@ void Grafo::sequenciade2Termos(){
             << "\nRecorrencia: " << aresta.getRecorrencia() << "\n\n";
     }
     
+}
+
+void Grafo::sequenciadeNTermos(){
+
+    int nTermos;
+    cout << "\nSelecione o numero N de termos na sequencia:\n";
+    cin >> nTermos;
+
+    if(cin.fail()){
+        cout << "\nOpcao invalida\n";
+        exit(-1);
+    }
+
+
+    //agrupando sentencas
+    vector<vector<Aresta>> listagrupoSentencas;
+    vector<Aresta> grupoArestas;
+    for(int index = 0; index < int(arestas.size()); index++){
+        
+        if((index + 1) < int(arestas.size())){
+            if(
+                arestas[index].getverticeSeguinte().getPalavra() == 
+                arestas[index + 1].getVerticeAnterior().getPalavra()){
+                
+                grupoArestas.push_back(arestas[index]);
+                
+            }
+            else
+            {
+                grupoArestas.push_back(arestas[index]);
+                listagrupoSentencas.push_back(grupoArestas);
+                grupoArestas.clear();
+                continue;
+            }
+        }
+        else{
+            grupoArestas.push_back(arestas[index]);
+            listagrupoSentencas.push_back(grupoArestas);
+            grupoArestas.clear();
+
+        }
+
+    }
+
+    // for(auto arestas: listagrupoSentencas){
+    //     for(auto aresta: arestas){
+    //         cout << aresta.getVerticeAnterior().getPalavra()
+    //             << " - " << aresta.getverticeSeguinte().getPalavra() << " - ";
+    //     }
+
+    //     cout << "\n";
+    // }
+
+    //sentencas em texto
+    vector<string> listaSentencas;
+    string frase = "";
+    for(auto arestas: listagrupoSentencas){
+        frase = arestas[0].getVerticeAnterior().getPalavra() + " ";
+        for(auto aresta: arestas){
+             frase += aresta.getverticeSeguinte().getPalavra() + " ";
+        }
+        frase[frase.size() - 1] = '\0';
+        listaSentencas.push_back(frase);
+    }
+
+    int numPalavras = 0; 
+    int contador = 0;
+    string grupoPalavras = "";
+    vector<string> listaGrupoPalavras;
+    for (auto frase: listaSentencas){
+        istringstream iss(frase);
+        string lerIss;
+        while(iss){
+            iss >> lerIss;
+            grupoPalavras = lerIss + " ";
+            contador++;
+            istringstream iss2(frase);
+
+            int contWhileSacrificio = 0;
+            while(contador - contWhileSacrificio > 0){
+                string stringSacrificio;
+                iss2 >> stringSacrificio;
+                contWhileSacrificio++;
+            }
+            numPalavras = 0;
+            while (iss2)
+            {
+                numPalavras++;
+                iss2 >> lerIss;
+                grupoPalavras += lerIss + " ";
+                if((numPalavras == (nTermos - 1)) && iss2){
+                    //cout << grupoPalavras << "\n";
+                    grupoPalavras[grupoPalavras.size() - 1] = '\0';
+                    listaGrupoPalavras.push_back(grupoPalavras);
+                    grupoPalavras = "";
+                }
+            }
+            numPalavras = 0;
+        }
+        contador = 0;
+    }
+
+    int recorrenciaSequencia = 0;
+    map<string, int> sequenciasMaisUtilizadas;
+    for(auto frase1: listaGrupoPalavras){
+        for(auto frase2: listaGrupoPalavras){
+            if(frase1 == frase2){
+                recorrenciaSequencia++;
+            }
+            cout << "[" << frase1 << "]" << "[" << frase2 << "]";
+            cout << recorrenciaSequencia << endl;
+        }
+
+        sequenciasMaisUtilizadas.insert(make_pair(frase1, recorrenciaSequencia));
+        recorrenciaSequencia = 0;
+    }
+
+    cout << sequenciasMaisUtilizadas.size()<< endl;
+    for(auto mapIt = sequenciasMaisUtilizadas.begin(); mapIt != sequenciasMaisUtilizadas.end(); mapIt++){
+        string sequencia = mapIt->first;
+        int recorrencia = mapIt->second;
+
+        cout << sequencia << " " << recorrencia << endl;
+    }
+
+    // for (auto frase: listaGrupoPalavras)
+    // {
+    //     cout << frase;
+    //     cout << endl;
+    // }
+
+
+    // for (auto frase: listaSentencas)
+    // {
+    //     for(auto palavra: frase){
+    //         cout << palavra;
+    //     }
+    //     cout << endl;
+    // }
+    
+    
+
+    // for(auto arestas: listagrupoPalavras){
+    //     for(auto aresta: arestas){
+    //         cout << aresta.getVerticeAnterior().getPalavra()
+    //             << " - " << aresta.getverticeSeguinte().getPalavra() << " - ";
+    //     }
+
+    //     cout << "\n";
+    // }
+
 }
