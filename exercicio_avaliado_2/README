@@ -1,0 +1,59 @@
+Universidade Federal do Rio de Janeiro
+Escola Politecnica
+Departamento de Eletronica e de Computacao
+EEL670 - Linguagens de Programação - Turma 2020/2
+Prof: Miguel Elias Mitre Campista
+Autor: Juan Coutinho Lima
+
+Avaliacao 2. Programa para indicar palavras consecutivas de N termos mais utilizadas
+             num texto.
+
+## Indicação para compilação e execução:
+    
+    Para compilar o programa, basta acessar o diretorio contendo o arquivo Makefile e no terminal
+    executar o seguinte comando:
+    
+    $ make all
+
+    Apos essa ação o programa pode ser executado no terminal através do seguinte comando:
+
+    $ ./exec 
+
+    O programa pode ser opcionalmente compilado e linkeditado da seguinte maneira:
+
+    $ g++ -Wall -o exec grafo.cpp vertice.cpp aresta.cpp texto.cpp main.cpp
+
+    É recomendado que antes de uma segunda compilacao o seguinte comando seja executado:
+
+    $ make clean
+
+## Como utilizar:
+    Para o correto funcionamento do programa devemos ter um arquivo de texto contendo o nosso paragrafo
+    nomeado da seguinte forma: "paragrafo.txt". Este arquivo deve ser colocado na mesma pasta em que o
+    programa é executado.
+
+    Ao executar o programa recebemos a seguinte mensagem, que requisita uma entrada:
+   
+        Escolha uma das opcoes abaixo ou digite 0 (zero) para sair:
+
+        (1) Palavras mais utilizadas no texto.
+        (2) Sequencia de duas palavras mais utilizadas.
+        (3) Sequencia de N palavras.
+
+    Basta selecionar uma das opcoes e apertar enter.
+    
+    Opções 1 e 2:
+        As entradas 1 e 2 nao necessitam de nenhuma entrada adicional do usuario.
+        Na opção 1 o programa exibira as palavras com recorrencia maior que 2.
+        Na opção 2 o programa exibira a sequencia de palavras com 2 termos com maior recorrencia.
+
+    Opção 3:
+        Ao selecionar a opção 3 o usuário deverá fornecer o numero N de termos pertencentes a
+        uma sequencia, onde a recorrencia deve ser analisada. Caso nenhuma sequencia possua 
+        recorrencia uma mensagem será exibida.
+
+    A terminar a execução de uma das opções o usuário pode escolher outra opção ou digitar 
+    0 (zero) para sair.
+   
+
+    Para finalizar o programa bastar inserir 0 (zero).
