@@ -24,7 +24,8 @@ class Catalogo
     public:
         Catalogo();
         Catalogo(vector<Filme> );
-        Catalogo operator+=(Filme);
+        Catalogo operator+=(Filme );
+        Catalogo operator+=(vector<Filme> );
         void exibirFilmes();
         
 };
