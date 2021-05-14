@@ -19,6 +19,7 @@ class Catalogo
     private:
         vector<Filme> filmes;
         vector<string> cortarNome(string );
+        void insercaoOrdenada(Filme );
         
     public:
         Catalogo();

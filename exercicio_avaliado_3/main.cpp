@@ -18,15 +18,21 @@ using namespace std;
 
 int main(){
 
-    Filme filme1, filme2, filme3;
+    Filme filme1, filme2, filme3, filme4, filme5, filme6;
     filme1.nome = "Filme A";
     filme2.nome = "Filme";
     filme3.nome = "Destino C maior";
+    filme4.nome = "O amor do inferno da vida";
+    filme5.nome = "Alem daquilo que tudo";
+    filme6.nome = "Filme";
 
     Catalogo catalogo;
     catalogo += filme2;
     catalogo += filme3;
     catalogo += filme1;
+    catalogo += filme4;
+    catalogo += filme5;
+    catalogo += filme6;
 
     catalogo.exibirFilmes();
 
