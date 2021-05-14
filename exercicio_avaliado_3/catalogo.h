@@ -11,8 +11,12 @@ struct Filme
     string nome;
     string produtora;
     double nota;
+    bool operator==(Filme );
+    bool operator<(Filme );
+    
 };
 
+//Filme operator==(Filme& filme);
 
 class Catalogo
 {
@@ -27,6 +31,7 @@ class Catalogo
         Catalogo(vector<Filme> );
         Catalogo operator+=(Filme );
         Catalogo operator+=(vector<Filme> );
+        Catalogo operator-=(Filme );
         void exibirFilmes();
         
 };

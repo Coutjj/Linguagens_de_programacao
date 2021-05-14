@@ -17,6 +17,16 @@ Catalogo Catalogo::operator+=(Filme filmeInput){
     return novoCatalogo;
 }
 
+Catalogo Catalogo::operator+=(vector<Filme> filmesInput){
+
+    for(auto filme: filmesInput){
+        insercaoOrdenada(filme);
+    }
+
+    Catalogo novoCatalogo(filmes);
+    return novoCatalogo;    
+}
+
 //Retorna palavras de uma string divididas em um vetor
 vector<string> Catalogo::cortarNome(string nomeInput){
 
@@ -26,12 +36,10 @@ vector<string> Catalogo::cortarNome(string nomeInput){
     while (itNomeInput >> palavra)
     {
         palavrasNoNome.push_back(palavra);
-        cout << "[" << palavra << "]\n";
+        // cout << "[" << palavra << "]\n";
     }
 
     return palavrasNoNome;
-    
-
 }
 
 void Catalogo::exibirFilmes(){
@@ -55,6 +63,12 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
             vector<string> palavrasFilmeSalvo = cortarNome(filmes[index].nome);
             vector<string> palavrasFilmeInput = cortarNome(filmeInput.nome);
 
+            if(filmeInput == filmes[index]){
+                cout << "\n O filme " << filmeInput.nome
+                    << " nao pode ser inserido pois ele ja existe no catalogo\n";
+                break;
+            }
+
             for(int indexInput = 0; indexInput < int(palavrasFilmeInput.size()); indexInput++){
                 
                 if(indexInput < int(palavrasFilmeSalvo.size())){
@@ -68,15 +82,15 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
                 
 
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) > 0){
-                        cout << "Depois " << filmeInput.nome << " - " << filmes[index].nome
-                            << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
+                        // cout << "Depois " << filmeInput.nome << " - " << filmes[index].nome
+                        //     << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
                         break;
                         //Se cair aqui eu tenho que procurar ate encontrar status como antes
                     }
 
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) == 0){
-                        cout << "nao sei " << filmeInput.nome << " - " << filmes[index].nome
-                            << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
+                        // cout << "nao sei " << filmeInput.nome << " - " << filmes[index].nome
+                        //     << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
                         //Se cair aqui eu devo procurar ate encontrar status como antes ou se nao tem proxima palavra
                         //entra no lugar do nome original
                         if((int(palavrasFilmeInput.size()) - 1) <= indexInput){
@@ -87,7 +101,6 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
                 }
             }
 
-            cout << posicaoInsercao << endl;
             if ((posicaoInsercao != -1)){
                 vector<Filme>::iterator it = filmes.begin() + posicaoInsercao;
                 filmes.insert(it, filmeInput);
@@ -102,3 +115,43 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
     }
 
 }
+
+
+Catalogo Catalogo::operator-=(Filme filmeParaRemover){
+
+    vector<Filme> novaColecao;
+    cout << "\nREmover " << filmeParaRemover.nome << endl;
+
+    for(auto filme: filmes){
+        cout << "\nVerificando " << filme.nome << endl;
+        if(!(filme == filmeParaRemover)){
+            cout << "Passou " << filme.nome << endl;
+            novaColecao.push_back(filme);
+        }
+    }
+
+    filmes = novaColecao;
+    Catalogo novoCatalogo(novaColecao);
+    return novoCatalogo;
+}
+
+bool Filme::operator==(Filme filmeInput){
+
+    if(this->nome == filmeInput.nome){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool Filme::operator<(Filme filmeInput){
+    if(this->nome < filmeInput.nome){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
