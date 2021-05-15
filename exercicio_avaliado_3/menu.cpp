@@ -17,7 +17,8 @@ void Menu::opcoes(){
     {
         cout << "\nEscolha uma das opcoes abaixo ou digite 0 (zero) para sair.\n\n";
         cout << "(1) Inserir um filme.\n";
-        cout << "(2) Exibir catalogo\n\n";
+        cout << "(2) Inserir N filmes\n";
+        cout << "(3) Exibir catalogo\n\n";
 
         cin >> escolhaUsuario;
 
@@ -32,6 +33,9 @@ void Menu::opcoes(){
             inserirFilme();
             break;
         case 2:
+            inserirNFilmes();
+            break;
+        case 3:
             cout << catalogo;
             break;
         case 0:
@@ -48,7 +52,7 @@ void Menu::inserirFilme(){
     Filme filmeNovo;
     string nota;
     cin.ignore();
-    cout << "Inserir novo filme:\n\n";
+    cout << "\nInserir novo filme:\n\n";
     cout << "Nome: ";
     getline(cin, filmeNovo.nome);
     cout << "Produtora: ";
@@ -59,5 +63,40 @@ void Menu::inserirFilme(){
     filmeNovo.nota = stoi(nota);
 
     catalogo += filmeNovo;
+}
 
+void Menu::inserirNFilmes() {
+    
+    int numeroFilmes;
+    string nota;
+    Filme filmeNovo;
+    vector<Filme> filmesNovos;
+
+    cout << "\nInserir N filmes:\n\n";
+    cout << "\nEscolha o numero de filmes a serem inseridos:\n";
+
+    cin >> numeroFilmes;
+    
+    if(cin.fail()){
+        cout << "Opcao invalida\n";
+        exit(-1);
+    }
+    
+    cin.ignore();
+    for(int index = 0; index < numeroFilmes; index++){
+        cout << "\nInserir novo filme " << index << " :\n\n";
+        cout << "Nome: ";
+        getline(cin, filmeNovo.nome);
+        cout << "Produtora: ";
+        getline(cin, filmeNovo.produtora);
+        cout << "Nota: ";
+        getline(cin, nota);
+
+        filmeNovo.nota = stoi(nota);
+
+        filmesNovos.push_back(filmeNovo);
+    }
+
+    catalogo += filmesNovos;
+    
 }
