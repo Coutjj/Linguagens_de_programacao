@@ -13,6 +13,7 @@ struct Filme
     double nota;
     bool operator==(Filme );
     bool operator<(Filme );
+    friend ostream& operator<<(ostream &, Filme &);
     
 };
 
@@ -25,14 +26,18 @@ class Catalogo
         vector<string> cortarNome(string );
         void insercaoOrdenada(Filme );
         int teste;
+        void lerCatalogoSalvo();
         
     public:
         Catalogo();
-        Catalogo(vector<Filme> );
-        Catalogo operator+=(Filme );
-        Catalogo operator+=(vector<Filme> );
-        Catalogo operator-=(Filme );
-        void exibirFilmes();
+        Catalogo(vector<Filme>);
+        Catalogo operator+=(Filme);
+        Catalogo operator+=(vector<Filme>);
+        Catalogo operator-=(Filme);
+        Filme *operator()(string);
+        Filme *operator()(string, int);
+        Filme *operator()(string, string);
+        friend ostream& operator<<(ostream &, Catalogo &);
         
 };
 

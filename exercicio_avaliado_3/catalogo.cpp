@@ -1,9 +1,14 @@
 #include <iostream>
 #include <sstream>
+#include <iomanip>
+#include <fstream>
+#include <string>
 #include "catalogo.h"
 
-Catalogo::Catalogo(){
+using namespace std;
 
+Catalogo::Catalogo(){
+    lerCatalogoSalvo();
 }
 
 Catalogo::Catalogo(vector<Filme> filmesInput){
@@ -36,18 +41,10 @@ vector<string> Catalogo::cortarNome(string nomeInput){
     while (itNomeInput >> palavra)
     {
         palavrasNoNome.push_back(palavra);
-        // cout << "[" << palavra << "]\n";
     }
 
     return palavrasNoNome;
 }
-
-void Catalogo::exibirFilmes(){
-    for(auto filme: filmes){
-        cout << filme.nome << endl;
-    }
-}
-
 
 
 void Catalogo::insercaoOrdenada(Filme filmeInput){
@@ -120,12 +117,9 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
 Catalogo Catalogo::operator-=(Filme filmeParaRemover){
 
     vector<Filme> novaColecao;
-    cout << "\nREmover " << filmeParaRemover.nome << endl;
 
     for(auto filme: filmes){
-        cout << "\nVerificando " << filme.nome << endl;
         if(!(filme == filmeParaRemover)){
-            cout << "Passou " << filme.nome << endl;
             novaColecao.push_back(filme);
         }
     }
@@ -133,6 +127,99 @@ Catalogo Catalogo::operator-=(Filme filmeParaRemover){
     filmes = novaColecao;
     Catalogo novoCatalogo(novaColecao);
     return novoCatalogo;
+}
+
+Filme *Catalogo::operator()(string filmeProcurado){
+    for(int index = 0; index < int(filmes.size()); index++){
+        if(filmes[index].nome == filmeProcurado){
+            return (&filmes[index]);
+        }  
+    }
+
+    return NULL;
+}
+
+Filme *Catalogo::operator()(string nomeBusca, int novaNota){
+    auto it = filmes.begin();
+    for(int index = 0; index < int(filmes.size()); index++){
+        if(nomeBusca == filmes[index].nome){
+            it += index;
+            Filme filmeAlterado;
+            filmeAlterado.nome = nomeBusca;
+            filmeAlterado.nota = novaNota;
+            filmeAlterado.produtora = filmes[index].produtora;
+            filmes.erase(it);
+            filmes.insert(it, filmeAlterado);
+            return &filmes[index];
+        }
+    }
+
+    return NULL;
+}
+
+Filme *Catalogo::operator()(string nomeBusca, string novaProdutora){
+
+    auto it = filmes.begin();
+    for(int index = 0; index < int(filmes.size()); index++){
+        if(nomeBusca == filmes[index].nome){
+            it += index;
+            Filme filmeAlterado;
+            filmeAlterado.nome = nomeBusca;
+            filmeAlterado.nota = filmes[index].nota;
+            filmeAlterado.produtora = novaProdutora;
+            filmes.erase(it);
+            filmes.insert(it, filmeAlterado);
+            return &filmes[index];
+        }
+    }
+    
+    return NULL;
+}
+
+void Catalogo::lerCatalogoSalvo(){
+    fstream input;
+    input.open("catalogo.txt", ios::in);
+    string linha;
+
+    if(input.is_open()){
+        while ( getline(input, linha))
+        {
+            if(linha[0] == '#'){
+                continue;
+            }
+
+            stringstream ss(linha);
+            string dadosTexto;
+            vector<string> dadosFilme;
+            while (getline(ss, dadosTexto, ':'))
+            {
+                dadosFilme.push_back(dadosTexto);
+            }
+            
+            Filme filmeTemp;
+            //ss >> dadosFilme;
+            filmeTemp.nome = dadosFilme[0];
+            //ss >> dadosFilme;
+            filmeTemp.produtora = dadosFilme[1];
+            //ss >> dadosFilme;
+            filmeTemp.nota = stoi(dadosFilme[2]);
+            insercaoOrdenada(filmeTemp);
+        }      
+    }
+}
+
+
+
+
+ostream& operator<<(ostream &out, Catalogo &catalogoInput){
+    out << "\nCatalogo de filmes:\n\n";
+    out << setw(30) << left << "Nome\t" << setw(30) << left << "Produtora\t" << "Nota\n\n"; 
+
+    for(auto filme: catalogoInput.filmes){
+        out << setw(30) << left << filme.nome << "\t" << setw(30) << left << filme.produtora << "\t" << filme.nota << endl;
+    }
+
+    return out;
 }
 
 bool Filme::operator==(Filme filmeInput){
@@ -154,4 +241,9 @@ bool Filme::operator<(Filme filmeInput){
     }
 }
 
-
+ostream& operator<<(ostream &out, Filme &filme){
+    out << "\nFilme na tela:\n\n";
+    out << setw(30) << left << "Nome\t" << setw(30) << left << "Produtora\t" << "Nota\n\n"; 
+    out << setw(30) << left << filme.nome << "\t" << setw(30) << left << filme.produtora << "\t" << filme.nota << endl;
+    return out;
+}
