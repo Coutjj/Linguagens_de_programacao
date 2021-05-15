@@ -13,21 +13,16 @@
 #include <iostream>
 #include <vector>
 #include "catalogo.h"
+#include "menu.h"
 
 using namespace std;
 
 
 int main(){
+	
+	Menu menu;
+	menu.opcoes();
 
-	Catalogo novoCatalogo;
-	cout << novoCatalogo;
-
-	Filme filmeNovo;
-	filmeNovo.nome = "O ultimo filme";
-	filmeNovo.produtora = "A nova produtora";
-	filmeNovo.nota = 10;
-
-	novoCatalogo.salvarCatalogo();
 
 	// Filme filme1, filme2, filme3, filme4, filme5, filme6, filme7, filme8, filme9;
 	// filme1.nome = "Filme A";
@@ -97,29 +92,5 @@ int main(){
 	// cout << catalogo;
 	// cout << filme8;
 
-    // int escolhaUsuario = 0;
-
-    // while (escolhaUsuario == 0)
-    // {
-    //     cout << "\n Escolha uma das opcoes abaixo ou digite 0 (zero) para sair.\n\n";
-    //     cout << "Inserir novo filme na lista ordenada\n\n";
-
-    //     cin >> escolhaUsuario;
-
-    //     if(cin.fail()){
-    //         cout << "Operacao invalida\n";
-    //         exit(-1);
-    //     }
-
-    //     switch (escolhaUsuario)
-    //     {
-    //     case 1:
-    //         /* code */
-    //         break;
-        
-    //     default:
-    //         break;
-    //     }
-
-    // }
+    
 }
