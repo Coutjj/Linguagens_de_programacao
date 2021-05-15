@@ -38,6 +38,7 @@ class Catalogo
         Filme *operator()(string, int);
         Filme *operator()(string, string);
         friend ostream& operator<<(ostream &, Catalogo &);
+        void salvarCatalogo();
         
 };
 

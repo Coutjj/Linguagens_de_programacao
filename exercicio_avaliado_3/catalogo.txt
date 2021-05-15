@@ -1,6 +1,6 @@
-# Nao Modifique este arquivo. Execute as alteracoes no catalogo atraves do programa.
-filme:Grande Produtora:5
-A grande nao sei:Caramba Produtora:4
-Ixe, sumiu o ze:Lalala production: 5
-Grande Filme:Pequena produtora:1
-A aposta:E la se foi:5
+Nao altere o conteudo deste arquivo. Caso seja necessario realizar alguma alteracao, faca atraves do programa.
+A aposta:E la se foi:5.000000
+A grande nao sei:Caramba Produtora:4.000000
+Filme:Grande Produtora:5.000000
+Grande filme:Pequena produtora:1.000000
+Ixe sumiu o ze:Lalala production:5.000000

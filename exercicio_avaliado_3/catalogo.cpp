@@ -52,7 +52,7 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
 
     if(filmes.size() == 0){
         filmes.push_back(filmeInput);
-        //cout << "\nInseri " << filmeInput.nome << " Na pos 1\n";
+        cout << "\nInseri " << filmeInput.nome << " Na pos 1\n";
     }
     else{
         for(int index = 0; index < int(filmes.size()); index++){
@@ -70,8 +70,8 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
                 
                 if(indexInput < int(palavrasFilmeSalvo.size())){
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) < 0){
-                       // cout << "Antes " << filmeInput.nome << " - " << filmes[index].nome
-                        //    << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
+                       cout << "Antes " << filmeInput.nome << " - " << filmes[index].nome
+                           << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
                         posicaoInsercao = index;
                         break;
                         //Se cair aqui eu achei a posicao
@@ -79,15 +79,15 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
                 
 
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) > 0){
-                        // cout << "Depois " << filmeInput.nome << " - " << filmes[index].nome
-                        //     << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
+                        cout << "Depois " << filmeInput.nome << " - " << filmes[index].nome
+                            << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
                         break;
                         //Se cair aqui eu tenho que procurar ate encontrar status como antes
                     }
 
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) == 0){
-                        // cout << "nao sei " << filmeInput.nome << " - " << filmes[index].nome
-                        //     << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
+                        cout << "nao sei " << filmeInput.nome << " - " << filmes[index].nome
+                            << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
                         //Se cair aqui eu devo procurar ate encontrar status como antes ou se nao tem proxima palavra
                         //entra no lugar do nome original
                         if((int(palavrasFilmeInput.size()) - 1) <= indexInput){
@@ -197,17 +197,32 @@ void Catalogo::lerCatalogoSalvo(){
             }
             
             Filme filmeTemp;
-            //ss >> dadosFilme;
+   
             filmeTemp.nome = dadosFilme[0];
-            //ss >> dadosFilme;
             filmeTemp.produtora = dadosFilme[1];
-            //ss >> dadosFilme;
             filmeTemp.nota = stoi(dadosFilme[2]);
             insercaoOrdenada(filmeTemp);
         }      
     }
+
+    input.close();
 }
 
+void Catalogo::salvarCatalogo(){
+    fstream input;
+    input.open("catalogo.txt", ios::out);
+    input << "Nao altere o conteudo deste arquivo. Caso seja necessario realizar "
+        << "alguma alteracao, faca atraves do programa.\n";
+
+    string linha;
+
+    for(auto filme: filmes){
+        linha = filme.nome + ":" + filme.produtora + ":" + to_string(filme.nota);
+        input << linha << "\n";
+    }
+
+    input.close();
+}
 
 
 

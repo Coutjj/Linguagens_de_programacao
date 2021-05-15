@@ -21,7 +21,14 @@ int main(){
 
 	Catalogo novoCatalogo;
 	cout << novoCatalogo;
-	
+
+	Filme filmeNovo;
+	filmeNovo.nome = "O ultimo filme";
+	filmeNovo.produtora = "A nova produtora";
+	filmeNovo.nota = 10;
+
+	novoCatalogo.salvarCatalogo();
+
 	// Filme filme1, filme2, filme3, filme4, filme5, filme6, filme7, filme8, filme9;
 	// filme1.nome = "Filme A";
 	// filme2.nome = "Filme";
