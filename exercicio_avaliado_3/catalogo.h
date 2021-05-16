@@ -14,10 +14,9 @@ struct Filme
     bool operator==(Filme );
     bool operator<(Filme );
     friend ostream& operator<<(ostream &, Filme &);
+    friend istream& operator>>(istream &, Filme &);
     
 };
-
-//Filme operator==(Filme& filme);
 
 class Catalogo
 {

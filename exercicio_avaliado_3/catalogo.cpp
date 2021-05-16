@@ -262,3 +262,17 @@ ostream& operator<<(ostream &out, Filme &filme){
     out << setw(30) << left << filme.nome << "\t" << setw(30) << left << filme.produtora << "\t" << filme.nota << endl;
     return out;
 }
+
+istream& operator>>(istream &in, Filme &filmeNovo){
+    string nota;
+    cout << "\nInserir novo filme:\n\n";
+    cout << "Nome: ";
+    getline(in, filmeNovo.nome);
+    cout << "Produtora: ";
+    getline(in, filmeNovo.produtora);
+    cout << "Nota: ";
+    getline(in, nota);
+    filmeNovo.nota = stoi(nota);
+    
+    return in;
+}

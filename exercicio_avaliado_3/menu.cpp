@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>
 #include "menu.h"
 #include "catalogo.h"
 
@@ -59,18 +60,8 @@ void Menu::opcoes(){
 
 void Menu::inserirFilme(){
     Filme filmeNovo;
-    string nota;
-    cin.ignore();
-    cout << "\nInserir novo filme:\n\n";
-    cout << "Nome: ";
-    getline(cin, filmeNovo.nome);
-    cout << "Produtora: ";
-    getline(cin, filmeNovo.produtora);
-    cout << "Nota: ";
-    getline(cin, nota);
-
-    filmeNovo.nota = stoi(nota);
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin >> filmeNovo;
     catalogo += filmeNovo;
 }
 
@@ -91,18 +82,9 @@ void Menu::inserirNFilmes() {
         exit(-1);
     }
 
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     for(int index = 0; index < numeroFilmes; index++){
-        cout << "\nInserir novo filme " << index << " :\n\n";
-        cout << "Nome: ";
-        getline(cin, filmeNovo.nome);
-        cout << "Produtora: ";
-        getline(cin, filmeNovo.produtora);
-        cout << "Nota: ";
-        getline(cin, nota);
-
-        filmeNovo.nota = stoi(nota);
-
+        cin >> filmeNovo;
         filmesNovos.push_back(filmeNovo);
     }
 
