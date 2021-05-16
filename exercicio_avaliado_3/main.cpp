@@ -12,85 +12,35 @@
 
 #include <iostream>
 #include <vector>
+#include <stdio.h>
+#include <unistd.h>
 #include "catalogo.h"
 #include "menu.h"
 
 using namespace std;
 
 
-int main(){
-	
+int main(int argc, char *argv[]){
+
 	Menu menu;
-	menu.opcoes();
 
+	if(argc == 1){
+		menu.opcoes();
+	}
+	else{
 
-	// Filme filme1, filme2, filme3, filme4, filme5, filme6, filme7, filme8, filme9;
-	// filme1.nome = "Filme A";
-	// filme2.nome = "Filme";
-	// filme3.nome = "Destino C maior";
-	// filme4.nome = "O amor do inferno da vida";
-	// filme5.nome = "Alem daquilo que tudo";
-	// filme6.nome = "Filme";
-	// filme7.nome = "So um quadrinho";
-	// filme8.nome = "Piada do tanque";
-	// filme9.nome = "Mais importante que nunca";
-
-    // Catalogo catalogo;
-    // catalogo += filme2;
-    // catalogo += filme3;
-    // catalogo += filme1;
-    // catalogo += filme4;
-    // catalogo += filme5;
-    // catalogo += filme6;
-
-    // vector<Filme> filmes = {filme7, filme8, filme9};
-
-    // catalogo += filmes;
-
-    // cout << catalogo;
-
-	// catalogo -= filme1;
-
-	// cout << catalogo;
-
-	// Filme *filmeProcurado;
-	// filmeProcurado = catalogo("Piada do tanque");
-
-	// if (filmeProcurado != NULL){
-	// 	cout << "\nA busca retornou: " << filmeProcurado->nome << endl;
-	// }
-	// else{
-	// 	cout << "\nEh null\n";
-	// }
-
-	// filme7.produtora = "Produtora 1";
-	// filme7.nota = 3;
-
-	// Filme *filmeEditado;
-	// filmeEditado = catalogo("So um quadrinho", 3);
-
-	// if (filmeEditado != NULL){
-	// 	cout << "\nA busca retornou: " << filmeEditado->nome 
-	// 		<< " " << filmeEditado->produtora << " " 
-	// 		<< filmeEditado->nota << endl;
-	// }
-	// else{
-	// 	cout << "\nEh null\n";
-	// }
-
-	// filmeEditado = catalogo("So um quadrinho", "Nova Produtora 2");
-
-	// if (filmeEditado != NULL){
-	// 	cout << "\nA busca retornou: " << filmeEditado->nome 
-	// 		<< " " << filmeEditado->produtora << " " 
-	// 		<< filmeEditado->nota << endl;
-	// }
-	// else{
-	// 	cout << "\nEh null\n";
-	// }
-
-	// cout << catalogo;
-	// cout << filme8;
-
+		int opcao;
+		while((opcao = getopt(argc, argv, ":i:")) != -1 ){
+			switch (opcao)
+			{
+				case 'i':
+					cout << "\nC quer inserir " << optarg;
+					break;
+				
+				default:
+					break;
+			}
+		}
+	}
     
 }

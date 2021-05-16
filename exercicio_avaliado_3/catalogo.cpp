@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <algorithm>
 #include "catalogo.h"
 
 using namespace std;
@@ -49,6 +50,9 @@ vector<string> Catalogo::cortarNome(string nomeInput){
 
 void Catalogo::insercaoOrdenada(Filme filmeInput){
     int posicaoInsercao = -1;
+
+    transform(filmeInput.nome.begin(), filmeInput.nome.end(), filmeInput.nome.begin(), ::toupper);
+    transform(filmeInput.produtora.begin(), filmeInput.produtora.end(), filmeInput.produtora.begin(), ::toupper);
 
     if(filmes.size() == 0){
         filmes.push_back(filmeInput);
@@ -139,8 +143,14 @@ Filme *Catalogo::operator()(string filmeProcurado){
     return NULL;
 }
 
-Filme *Catalogo::operator()(string nomeBusca, int novaNota){
+Filme *Catalogo::operator()(string nomeBusca, double novaNota){
     auto it = filmes.begin();
+
+    if((novaNota < 0)){
+        cout << "\nEntrada invalida\n";
+        exit(-1);
+    }
+
     for(int index = 0; index < int(filmes.size()); index++){
         if(nomeBusca == filmes[index].nome){
             it += index;
@@ -158,6 +168,15 @@ Filme *Catalogo::operator()(string nomeBusca, int novaNota){
 }
 
 Filme *Catalogo::operator()(string nomeBusca, string novaProdutora){
+
+
+    if(!(Catalogo::ehAlphaNumerico(novaProdutora)))
+    {
+        cout << "\nNomes invalidos\n";
+        exit(-1);
+    }
+
+    transform(novaProdutora.begin(), novaProdutora.end(), novaProdutora.begin(), ::toupper);
 
     auto it = filmes.begin();
     for(int index = 0; index < int(filmes.size()); index++){
@@ -187,7 +206,8 @@ void Catalogo::lerCatalogoSalvo(){
             if(linha[0] == '#'){
                 continue;
             }
-
+            
+            transform(linha.begin(), linha.end(), linha.begin(), ::toupper);
             stringstream ss(linha);
             string dadosTexto;
             vector<string> dadosFilme;
@@ -306,7 +326,25 @@ istream& operator>>(istream &in, Filme &filmeNovo){
     getline(in, filmeNovo.produtora);
     cout << "Nota: ";
     getline(in, nota);
-    filmeNovo.nota = stoi(nota);
+
+    if(in.fail()){
+        cout << "\nEntrada invalida\n";
+        exit(-1);
+    }
+
+    if(!(Catalogo::ehAlphaNumerico(filmeNovo.nome) 
+        && Catalogo::ehAlphaNumerico(filmeNovo.produtora)
+        && filmeNovo.nota >= 0)){
+        cout << "\nNomes invalidos\n";
+        exit(-1);
+    }
+
+    if(!Catalogo::ehNumerico(&nota[0])){
+        cout << "\nEntrada invalida\n";
+        exit(-1);
+    }
+
+    filmeNovo.nota = stod(nota);
     
     return in;
 }
@@ -319,4 +357,29 @@ bool Filme::operator>(Filme filme){
     else{
         return false;
     }
+}
+
+
+bool Catalogo::ehAlphaNumerico(string entrada){
+    for(auto letra: entrada){
+        if(letra != ' '){
+            if(!isalnum(letra)){
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool Catalogo::ehNumerico(char *entrada){
+    
+    char* endptr = 0;
+    strtod(entrada, &endptr);
+
+    if(*endptr != '\0' || endptr == entrada){
+        return false;
+    }
+        
+    return true;
 }

@@ -1,10 +1,11 @@
 # Nao altere o conteudo deste arquivo. Caso seja necessario realizar alguma alteracao, faca atraves do programa.
-A aposta:E la se foi:5.000000
-A grande nao sei:Caramba Produtora:4.000000
-Bom demais:melhor ainda:11.000000
-Filme:Grande Produtora:5.000000
-Filme A:Produtora B:3.000000
-Filme B:Produtora C:4.000000
-Grande filme:Pequena produtora:1.000000
-Ixe sumiu o ze:Lalala production:5.000000
-O melhor filme:melhor produtora:10.000000
+A APOSTA:E LA SE FOI:5.000000
+A GRANDE NAO SEI:CARAMBA PRODUTORA:4.000000
+BOM DEMAIS:MELHOR AINDA:11.000000
+FILME:GRANDE PRODUTORA:5.000000
+FILME A:PRODUTORA:5.000000
+FILME B:PRODUTORA C:4.000000
+GRANDE FILME:PEQUENA PRODUTORA:1.000000
+IXE SUMIU O ZE:LALALA PRODUCTION:5.000000
+MEU NOVO FILME:PRODUTORA 3:5.000000
+O MELHOR FILME:MELHOR PRODUTORA:10.000000

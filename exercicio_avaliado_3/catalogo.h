@@ -16,7 +16,7 @@ struct Filme
     bool operator>(Filme );
     friend ostream& operator<<(ostream &, Filme &);
     friend istream& operator>>(istream &, Filme &);
-    
+
 };
 
 class Catalogo
@@ -35,11 +35,13 @@ class Catalogo
         Catalogo operator+=(vector<Filme>);
         Catalogo operator-=(Filme);
         Filme *operator()(string);
-        Filme *operator()(string, int);
+        Filme *operator()(string, double);
         Filme *operator()(string, string);
         friend ostream& operator<<(ostream &, Catalogo &);
         void salvarCatalogo();
         void filmeMelhorAvaliado();
+        static bool ehAlphaNumerico(string);
+        static bool ehNumerico(char *);
         
 };
 

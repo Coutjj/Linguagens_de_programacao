@@ -132,3 +132,60 @@ void Menu::buscarFilme(){
         cout << "\nO filme \"" << nomeFilme << "\" nao existe no catalogo.\n";
     }
 }
+
+void Menu::editarFilme(){
+    string nomeFilme;
+    int opcao;
+    double novaNota;
+    string novaProdutora;
+    Filme *filmeEditado;
+
+    cout << "\nInsira o nome do filme a ser editado:\n\n";
+    cin.ignore();
+    getline(cin, nomeFilme);
+
+    if(cin.fail())
+    {
+        cout << "\nOpcao Invalida\n";
+        exit(-1);
+    }
+
+    cout << "\nDigite (1) para editar a nota ou (2) para editar a produtora.\n\n";
+    cin >> opcao;
+
+    if(cin.fail())
+    {
+        cout << "\nOpcao Invalida\n";
+        exit(-1);
+    }
+
+    if(opcao == 1){
+        cout << "\nNova nota: ";
+        cin >> novaNota;
+        if(cin.fail())
+        {
+            cout << "\nOpcao Invalida\n";
+            exit(-1);
+        }
+        filmeEditado = catalogo(nomeFilme, novaNota);
+    }
+    else if(opcao == 2){
+        cout << "\nNova produtora: ";
+        cin.ignore();
+        getline(cin, novaProdutora);
+        filmeEditado = catalogo(nomeFilme, novaProdutora);
+    }
+    else{
+        cout << "\nOpcao Invalida\n";
+        exit(-1);
+    }
+
+    if(filmeEditado != NULL){
+        cout << "\nFilme Editado:\n\n";
+        cout << *filmeEditado;
+    }
+    else{
+        cout << "\nO filme a ser editado nao existe na base\n";
+    }
+
+}
