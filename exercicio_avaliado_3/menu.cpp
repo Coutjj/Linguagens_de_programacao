@@ -18,7 +18,8 @@ void Menu::opcoes(){
         cout << "\nEscolha uma das opcoes abaixo ou digite 0 (zero) para sair.\n\n";
         cout << "(1) Inserir um filme.\n";
         cout << "(2) Inserir N filmes\n";
-        cout << "(3) Exibir catalogo\n\n";
+        cout << "(3) Remover filme\n";
+        cout << "(4) Exibir catalogo\n\n";
 
         cin >> escolhaUsuario;
 
@@ -36,6 +37,9 @@ void Menu::opcoes(){
             inserirNFilmes();
             break;
         case 3:
+            removerFilme();
+            break;
+        case 4:
             cout << catalogo;
             break;
         case 0:
@@ -81,7 +85,7 @@ void Menu::inserirNFilmes() {
         cout << "Opcao invalida\n";
         exit(-1);
     }
-    
+
     cin.ignore();
     for(int index = 0; index < numeroFilmes; index++){
         cout << "\nInserir novo filme " << index << " :\n\n";
@@ -99,4 +103,21 @@ void Menu::inserirNFilmes() {
 
     catalogo += filmesNovos;
     
+}
+
+void Menu::removerFilme(){
+    cout << "\nEntre com o nome do filme a ser removido:\n";
+    string nomeFilme;
+    cin.ignore();
+    getline(cin, nomeFilme);
+
+    Filme *filmeASerRemovido = catalogo(nomeFilme);
+
+    if(filmeASerRemovido != NULL){
+        catalogo -= *filmeASerRemovido;
+        cout << "\nFilme removido com sucesso.\n";
+    }
+    else{
+        cout << "\nO filme " << nomeFilme << " nao existe no catalogo.\n";
+    }
 }

@@ -6,4 +6,3 @@ Filme A:Produtora B:3.000000
 Filme B:Produtora C:4.000000
 Grande filme:Pequena produtora:1.000000
 Ixe sumiu o ze:Lalala production:5.000000
-Juan:produtora 2:4.000000

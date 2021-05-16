@@ -8,6 +8,7 @@ class Menu
 private:
     void inserirFilme();
     void inserirNFilmes();
+    void removerFilme();
     Catalogo catalogo;
 public:
     Menu();
