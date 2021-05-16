@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "menu.h"
 #include "catalogo.h"
 
@@ -19,7 +20,8 @@ void Menu::opcoes(){
         cout << "(1) Inserir um filme.\n";
         cout << "(2) Inserir N filmes\n";
         cout << "(3) Remover filme\n";
-        cout << "(4) Exibir catalogo\n\n";
+        cout << "(4) Buscar filme.\n";
+        cout << "(5) Exibir catalogo\n\n";
 
         cin >> escolhaUsuario;
 
@@ -40,6 +42,9 @@ void Menu::opcoes(){
             removerFilme();
             break;
         case 4:
+            buscarFilme();
+            break;
+        case 5:
             cout << catalogo;
             break;
         case 0:
@@ -77,7 +82,7 @@ void Menu::inserirNFilmes() {
     vector<Filme> filmesNovos;
 
     cout << "\nInserir N filmes:\n\n";
-    cout << "\nEscolha o numero de filmes a serem inseridos:\n";
+    cout << "\nEscolha o numero de filmes a serem inseridos:\n\n";
 
     cin >> numeroFilmes;
     
@@ -106,7 +111,7 @@ void Menu::inserirNFilmes() {
 }
 
 void Menu::removerFilme(){
-    cout << "\nEntre com o nome do filme a ser removido:\n";
+    cout << "\nEntre com o nome do filme a ser removido:\n\n";
     string nomeFilme;
     cin.ignore();
     getline(cin, nomeFilme);
@@ -118,6 +123,22 @@ void Menu::removerFilme(){
         cout << "\nFilme removido com sucesso.\n";
     }
     else{
-        cout << "\nO filme " << nomeFilme << " nao existe no catalogo.\n";
+        cout << "\nO filme \"" << nomeFilme << "\" nao existe no catalogo.\n";
+    }
+}
+
+void Menu::buscarFilme(){
+    cout << "\nEntre com o nome do filme a ser buscado:\n\n";
+    string nomeFilme;
+    cin.ignore();
+    getline(cin, nomeFilme);
+
+    Filme *filmeBuscado = catalogo(nomeFilme);
+
+    if(filmeBuscado != NULL){
+        cout << *filmeBuscado;
+    }
+    else{
+        cout << "\nO filme \"" << nomeFilme << "\" nao existe no catalogo.\n";
     }
 }
