@@ -10,6 +10,7 @@ private:
     void inserirNFilmes();
     void removerFilme();
     void buscarFilme();
+    void editarFilme();
     Catalogo catalogo;
 public:
     Menu();

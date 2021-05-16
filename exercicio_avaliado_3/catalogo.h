@@ -13,6 +13,7 @@ struct Filme
     double nota;
     bool operator==(Filme );
     bool operator<(Filme );
+    bool operator>(Filme );
     friend ostream& operator<<(ostream &, Filme &);
     friend istream& operator>>(istream &, Filme &);
     
@@ -38,6 +39,7 @@ class Catalogo
         Filme *operator()(string, string);
         friend ostream& operator<<(ostream &, Catalogo &);
         void salvarCatalogo();
+        void filmeMelhorAvaliado();
         
 };
 

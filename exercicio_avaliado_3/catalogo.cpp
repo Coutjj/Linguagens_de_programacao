@@ -224,6 +224,40 @@ void Catalogo::salvarCatalogo(){
     input.close();
 }
 
+void Catalogo::filmeMelhorAvaliado(){
+    Filme melhorFilme;
+    bool ehMelhorFilme = true;
+
+    //usando operador sobrecarregado >
+    for(int index = 0; index < int(filmes.size()); index++){
+        for(int index2 = 0; index2 < int(filmes.size()); index2++){
+            
+            if(index != index2){
+                cout << "Comp " << filmes[index].nome << filmes[index].nota << " - " <<filmes[index2].nome << filmes[index2].nota << endl;
+                if (!(filmes[index] >  filmes[index2])){
+                    cout << "Comp " << filmes[index].nome << filmes[index].nota << " - " <<filmes[index2].nome << filmes[index2].nota << endl;
+                    ehMelhorFilme = false;
+                }
+            }
+        }
+
+        if(ehMelhorFilme == true){
+            melhorFilme = filmes[index];
+            break;
+        }
+
+        ehMelhorFilme = true;
+    }
+
+    if(melhorFilme.nome != ""){
+        cout << "\nMelhor Filme:\n\n";
+        cout << melhorFilme;
+    }
+    else{
+        cout << "\nNao existe melhor filme.";
+    }
+    //Caso nao exista filme com maior nota, nao existe filme melhor.
+}
 
 
 ostream& operator<<(ostream &out, Catalogo &catalogoInput){
@@ -257,7 +291,7 @@ bool Filme::operator<(Filme filmeInput){
 }
 
 ostream& operator<<(ostream &out, Filme &filme){
-    out << "\nFilme na tela:\n\n";
+    //out << "\nFilme na tela:\n\n";
     out << setw(30) << left << "Nome\t" << setw(30) << left << "Produtora\t" << "Nota\n\n"; 
     out << setw(30) << left << filme.nome << "\t" << setw(30) << left << filme.produtora << "\t" << filme.nota << endl;
     return out;
@@ -275,4 +309,14 @@ istream& operator>>(istream &in, Filme &filmeNovo){
     filmeNovo.nota = stoi(nota);
     
     return in;
+}
+
+// retorna true quando filme1 > filme, onde filme1.nota > filme2.nota
+bool Filme::operator>(Filme filme){
+    if(this->nota > filme.nota){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

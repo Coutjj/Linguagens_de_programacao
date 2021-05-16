@@ -20,9 +20,11 @@ void Menu::opcoes(){
         cout << "\nEscolha uma das opcoes abaixo ou digite 0 (zero) para sair.\n\n";
         cout << "(1) Inserir um filme.\n";
         cout << "(2) Inserir N filmes\n";
-        cout << "(3) Remover filme\n";
-        cout << "(4) Buscar filme.\n";
-        cout << "(5) Exibir catalogo\n\n";
+        cout << "(3) Editar filme\n";
+        cout << "(4) Remover filme\n";
+        cout << "(5) Buscar filme\n";
+        cout << "(6) Melhor filme\n";
+        cout << "(7) Exibir catalogo\n\n";
 
         cin >> escolhaUsuario;
 
@@ -33,26 +35,32 @@ void Menu::opcoes(){
 
         switch (escolhaUsuario)
         {
-        case 1:
-            inserirFilme();
-            break;
-        case 2:
-            inserirNFilmes();
-            break;
-        case 3:
-            removerFilme();
-            break;
-        case 4:
-            buscarFilme();
-            break;
-        case 5:
-            cout << catalogo;
-            break;
-        case 0:
-            catalogo.salvarCatalogo();
-            break;
-        default:
-            break;
+            case 1:
+                inserirFilme();
+                break;
+            case 2:
+                inserirNFilmes();
+                break;
+            case 3:
+                editarFilme();
+                break;
+            case 4:
+                removerFilme();
+                break;
+            case 5:
+                buscarFilme();
+                break;
+            case 6:
+                catalogo.filmeMelhorAvaliado();
+                break;
+            case 7:
+                cout << catalogo;
+                break;
+            case 0:
+                catalogo.salvarCatalogo();
+                break;
+            default:
+                break;
         }
 
     }
