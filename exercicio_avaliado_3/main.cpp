@@ -7,7 +7,7 @@
   *  Prof: Miguel Elias Mitre Campista
   *  Autor: Juan Coutinho Lima
   * 
-  * Programa para gerenciar catalogos de um filme.
+  * Programa para gerenciar catalogos de filmes.
 */
 
 #include <iostream>

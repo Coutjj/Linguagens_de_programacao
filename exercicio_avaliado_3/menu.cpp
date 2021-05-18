@@ -1,3 +1,18 @@
+/*
+  
+  *  Universidade Federal do Rio de Janeiro
+  *  Escola Politecnica
+  *  Departamento de Eletronica e de Computacao
+  *  EEL770 - Linguagens de Programação - Turma 2020/2
+  *  Prof: Miguel Elias Mitre Campista
+  *  Autor: Juan Coutinho Lima
+  * 
+  * Definicoes da classe que modela um menu.
+  * Como o menu deve implementar exemplos de uso dos operadores sobrecarregados,
+  * foi escolhido que ele fosse encapsulado em uma classe separada. Assim, a
+  * responsabilidade de tratar as entradas sao destinadas a esta classe.
+*/
+
 #include <iostream>
 #include <string>
 #include <limits>
@@ -30,6 +45,7 @@ void Menu::opcoes(){
 
         if(cin.fail()){
             cout << "Operacao invalida\n";
+            catalogo.salvarCatalogo();
             exit(-1);
         }
 
@@ -66,6 +82,8 @@ void Menu::opcoes(){
     }
 }
 
+// Exemplo operador sobrecarregado cin >> filmeNovo
+// e catalogo += filmeNovo
 void Menu::inserirFilme(){
     Filme filmeNovo;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -73,6 +91,7 @@ void Menu::inserirFilme(){
     catalogo += filmeNovo;
 }
 
+// Exemplo operador sobrecarregado cin >> filmesNovos, quando filmesNovos eh um vetor de filmes.
 void Menu::inserirNFilmes() {
     
     int numeroFilmes;
@@ -100,7 +119,9 @@ void Menu::inserirNFilmes() {
     
 }
 
+// Exemplo operador sobrecarregado catalogo -= filme e catalogo(buscarFilme)
 void Menu::removerFilme(){
+
     cout << "\nEntre com o nome do filme a ser removido:\n\n";
     string nomeFilme;
     cin.ignore();
@@ -117,6 +138,7 @@ void Menu::removerFilme(){
     }
 }
 
+// Exemplo operador sobrecarregado catalogo(buscarFilme)
 void Menu::buscarFilme(){
     cout << "\nEntre com o nome do filme a ser buscado:\n\n";
     string nomeFilme;
@@ -126,6 +148,7 @@ void Menu::buscarFilme(){
     Filme *filmeBuscado = catalogo(nomeFilme);
 
     if(filmeBuscado != NULL){
+        cout << "\nFilme encontrado:\n\n";
         cout << *filmeBuscado;
     }
     else{
@@ -133,6 +156,7 @@ void Menu::buscarFilme(){
     }
 }
 
+// Exemplo operador sobrecarregado catalogo(buscarFilme, editarParametro)
 void Menu::editarFilme(){
     string nomeFilme;
     int opcao;

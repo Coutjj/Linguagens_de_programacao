@@ -16,7 +16,6 @@ Catalogo::Catalogo(vector<Filme> filmesInput){
     filmes = filmesInput;
 }
 
-
 Catalogo Catalogo::operator+=(Filme filmeInput){
     insercaoOrdenada(filmeInput);
     Catalogo novoCatalogo(filmes);
@@ -25,6 +24,7 @@ Catalogo Catalogo::operator+=(Filme filmeInput){
 
 Catalogo Catalogo::operator+=(vector<Filme> filmesInput){
 
+    //cada filme do vetor eh adicionado de forma ordenada
     for(auto filme: filmesInput){
         insercaoOrdenada(filme);
     }
@@ -33,7 +33,8 @@ Catalogo Catalogo::operator+=(vector<Filme> filmesInput){
     return novoCatalogo;    
 }
 
-//Retorna palavras de uma string divididas em um vetor
+// Retorna palavras de uma string divididas em um vetor
+// Ex.: "O grande filme" -> {"O", "Grande", "Filme"}
 vector<string> Catalogo::cortarNome(string nomeInput){
 
     stringstream itNomeInput(nomeInput);
@@ -56,7 +57,6 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
 
     if(filmes.size() == 0){
         filmes.push_back(filmeInput);
-        // cout << "\nInseri " << filmeInput.nome << " Na pos 1\n";
     }
     else{
         for(int index = 0; index < int(filmes.size()); index++){
@@ -74,25 +74,23 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
                 
                 if(indexInput < int(palavrasFilmeSalvo.size())){
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) < 0){
-                    //    cout << "Antes " << filmeInput.nome << " - " << filmes[index].nome
-                    //        << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
                         posicaoInsercao = index;
                         break;
-                        //Se cair aqui eu achei a posicao
+                        // Se entrar aqui eu achei a posicao
+                        // (inserir antes)
                     }
                 
 
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) > 0){
-                        // cout << "Depois " << filmeInput.nome << " - " << filmes[index].nome
-                        //     << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
                         break;
-                        //Se cair aqui eu tenho que procurar ate encontrar status como antes
+                        // Se entrar aqui eu tenho que interromper e continuar busca ate
+                        // encontrar posicao como (inserir antes)
                     }
 
                     if(palavrasFilmeInput[indexInput].compare(palavrasFilmeSalvo[indexInput]) == 0){
-                        // cout << "nao sei " << filmeInput.nome << " - " << filmes[index].nome
-                        //     << " -> " << palavrasFilmeInput[indexInput]<<  " e " << palavrasFilmeSalvo[indexInput] << endl;
-                        //Se cair aqui eu devo procurar ate encontrar status como antes ou se nao tem proxima palavra
+                        
+                        // Se entrar aqui eu devo procurar ate encontrar status como (inserir antes)
+                        // ou verificar se existe proxima palavra no nome do filme que mudaria a sua posicao
                         //entra no lugar do nome original
                         if((int(palavrasFilmeInput.size()) - 1) <= indexInput){
                             posicaoInsercao = index;
@@ -106,12 +104,11 @@ void Catalogo::insercaoOrdenada(Filme filmeInput){
                 vector<Filme>::iterator it = filmes.begin() + posicaoInsercao;
                 filmes.insert(it, filmeInput);
                 break;            
-            }
+            }// Se nao entrou em (inserir antes) eh pq so pode entrar na ultima posicao
             else if(index == (int(filmes.size()) - 1)){
                 filmes.push_back(filmeInput);
                 break;
             }
-
         }
     }
 
@@ -134,6 +131,9 @@ Catalogo Catalogo::operator-=(Filme filmeParaRemover){
 }
 
 Filme *Catalogo::operator()(string filmeProcurado){
+
+    transform(filmeProcurado.begin(), filmeProcurado.end(), filmeProcurado.begin(), ::toupper);
+
     for(int index = 0; index < int(filmes.size()); index++){
         if(filmes[index].nome == filmeProcurado){
             return (&filmes[index]);
@@ -144,6 +144,8 @@ Filme *Catalogo::operator()(string filmeProcurado){
 }
 
 Filme *Catalogo::operator()(string nomeBusca, double novaNota){
+
+    transform(nomeBusca.begin(), nomeBusca.end(), nomeBusca.begin(), ::toupper);
     auto it = filmes.begin();
 
     if((novaNota < 0)){
@@ -169,13 +171,12 @@ Filme *Catalogo::operator()(string nomeBusca, double novaNota){
 
 Filme *Catalogo::operator()(string nomeBusca, string novaProdutora){
 
-
     if(!(Catalogo::ehAlphaNumerico(novaProdutora)))
     {
         cout << "\nNomes invalidos\n";
         exit(-1);
     }
-
+    transform(nomeBusca.begin(), nomeBusca.end(), nomeBusca.begin(), ::toupper);
     transform(novaProdutora.begin(), novaProdutora.end(), novaProdutora.begin(), ::toupper);
 
     auto it = filmes.begin();
@@ -203,6 +204,7 @@ void Catalogo::lerCatalogoSalvo(){
     if(input.is_open()){
         while ( getline(input, linha))
         {
+            // Pula a linha de aviso/comentario
             if(linha[0] == '#'){
                 continue;
             }
@@ -248,14 +250,12 @@ void Catalogo::filmeMelhorAvaliado(){
     Filme melhorFilme;
     bool ehMelhorFilme = true;
 
-    //usando operador sobrecarregado >
+    // Forcando o uso do operador sobrecarregado filme1 > filme2
     for(int index = 0; index < int(filmes.size()); index++){
         for(int index2 = 0; index2 < int(filmes.size()); index2++){
             
             if(index != index2){
-                cout << "Comp " << filmes[index].nome << filmes[index].nota << " - " <<filmes[index2].nome << filmes[index2].nota << endl;
                 if (!(filmes[index] >  filmes[index2])){
-                    cout << "Comp " << filmes[index].nome << filmes[index].nota << " - " <<filmes[index2].nome << filmes[index2].nota << endl;
                     ehMelhorFilme = false;
                 }
             }
@@ -276,16 +276,18 @@ void Catalogo::filmeMelhorAvaliado(){
     else{
         cout << "\nNao existe melhor filme.";
     }
-    //Caso nao exista filme com maior nota, nao existe filme melhor.
+    // Caso nao exista filme com maior nota, nao existe filme melhor.
 }
 
 
 ostream& operator<<(ostream &out, Catalogo &catalogoInput){
     out << "\nCatalogo de filmes:\n\n";
-    out << setw(30) << left << "Nome\t" << setw(30) << left << "Produtora\t" << "Nota\n\n"; 
+    out << setw(30) << left << "Nome\t" << setw(30) << left << "Produtora\t" 
+        << "Nota\n\n"; 
 
     for(auto filme: catalogoInput.filmes){
-        out << setw(30) << left << filme.nome << "\t" << setw(30) << left << filme.produtora << "\t" << filme.nota << endl;
+        out << setw(30) << left << filme.nome << "\t" << setw(30) << left 
+            << filme.produtora << "\t" << filme.nota << endl;
     }
 
     return out;
@@ -311,13 +313,14 @@ bool Filme::operator<(Filme filmeInput){
 }
 
 ostream& operator<<(ostream &out, Filme &filme){
-    //out << "\nFilme na tela:\n\n";
+
     out << setw(30) << left << "Nome\t" << setw(30) << left << "Produtora\t" << "Nota\n\n"; 
     out << setw(30) << left << filme.nome << "\t" << setw(30) << left << filme.produtora << "\t" << filme.nota << endl;
     return out;
 }
 
 istream& operator>>(istream &in, Filme &filmeNovo){
+    
     string nota;
     cout << "\nInserir novo filme:\n\n";
     cout << "Nome: ";
@@ -376,7 +379,7 @@ bool Catalogo::ehNumerico(char *entrada){
     
     char* endptr = 0;
     strtod(entrada, &endptr);
-
+    // se conversao falhar a entrada nao eh valida
     if(*endptr != '\0' || endptr == entrada){
         return false;
     }
