@@ -1,0 +1,85 @@
+Universidade Federal do Rio de Janeiro
+Escola Politecnica
+Departamento de Eletronica e de Computacao
+EEL670 - Linguagens de Programação - Turma 2020/2
+Prof: Miguel Elias Mitre Campista
+Autor: Juan Coutinho Lima
+
+Avaliacao 3. Programa para manipular um catálogo de filmes.
+
+## Indicação para compilação e execução:
+    
+    Para compilar o programa, basta acessar o diretorio contendo o arquivo Makefile e no terminal
+    executar o seguinte comando:
+    
+    $ make all
+
+    Apos essa ação o programa pode ser executado no terminal através do seguinte comando:
+
+    $ ./exec 
+
+    O programa pode ser opcionalmente compilado e linkeditado da seguinte maneira:
+
+    $ g++ -Wall -o exec catalogo.cpp menu.cpp main.cpp
+
+    É recomendado que antes de uma segunda compilacao o seguinte comando seja executado:
+
+    $ make clean
+
+## Como utilizar:
+    Para o correto funcionamento do programa o arquivo "catalogo.txt" deve ser mantido na mesma pasta
+    em que o programa é executado.
+    Ao iniciar o programa sempre carregara o catálogo populado na ultima execução. Sempre que o programa
+    for finalizado o catálogo atual será salvo.
+    
+    Ao executar o programa recebemos a seguinte mensagem, que requisita uma entrada:
+   
+        Escolha uma das opcoes abaixo ou digite 0 (zero) para sair.
+
+        (1) Inserir um filme.
+        (2) Inserir N filmes
+        (3) Editar filme
+        (4) Remover filme
+        (5) Buscar filme
+        (6) Melhor filme
+        (7) Exibir catalogo
+
+
+    Basta selecionar uma das opcoes e apertar enter.
+    
+    Opçõe 1:
+        Nesta opção o usuario poderá adicionar um filme ao catálogo. Basta preencher as opções
+        nome (string), produtora (string) e nota (double) na ordem em que forem requisitas na 
+        linha de comando.
+    
+    Opção 2:
+        Ao selecionar esta opção o usuario poderá adicionar N filmes ao catálogo, onde o número
+        N de filmes é especificado pelo usuário. Basta indicar o numero de filmes que serão
+        inseridos e preencher as opções nome (string), produtora (string) e nota (double) na 
+        ordem em que forem requisitas na linha de comando.
+
+    Opção 3:
+        Nesta opção podemos indicar um filme a ser editado. Para isso, devemos passar o nome do 
+        filme que queremos editar e o parametro que deve ser editado, (1) para nome e (2) para
+        produtora. Essas informações devem ser inseridas a medida que forem requisitadas na 
+        linha de comando.
+
+    Opção 4:
+        Ao selecionar a opção (4) o usuário pode indicar ao programa qual filme ele quer remover
+        do catalogo. Para isso, basta indicar o nome do filme a ser removido quando esta informação
+        for requerida.
+    
+    Opção 5:
+        Ao selecionar a opção (5) o usuário pode consultar a existência de um filme no catálogo.
+        Para isso, basta indicar o nome do filme a ser buscado quando esta informação
+        for requerida.
+    
+    Opção 6:
+        Nesta opção podemos visualizar o filme com maior nota no catálogo. Se não existir filme
+        com esta característica uma mensagem será exibida.
+    
+    Opção 7:
+        Exibe todo o catálogo de filmes na tela. 
+        
+    A terminar a execução de uma das opções o usuário pode escolher outra opção ou digitar 
+    0 (zero) para sair.

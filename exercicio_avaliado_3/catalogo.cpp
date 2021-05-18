@@ -17,12 +17,24 @@ Catalogo::Catalogo(vector<Filme> filmesInput){
 }
 
 Catalogo Catalogo::operator+=(Filme filmeInput){
+    if(int(filmes.size() + 1) > numMaxFilmes){
+        cout << "\nNumero maximo de filmes excedido\n";
+        Catalogo novoCatalogo(filmes);
+        return novoCatalogo;
+    }
+
     insercaoOrdenada(filmeInput);
     Catalogo novoCatalogo(filmes);
     return novoCatalogo;
 }
 
 Catalogo Catalogo::operator+=(vector<Filme> filmesInput){
+
+    if(int(filmes.size() + filmesInput.size()) > numMaxFilmes){
+        cout << "\nNumero maximo de filmes excedido\n";
+        Catalogo novoCatalogo(filmes);
+        return novoCatalogo;
+    }
 
     //cada filme do vetor eh adicionado de forma ordenada
     for(auto filme: filmesInput){
@@ -222,7 +234,7 @@ void Catalogo::lerCatalogoSalvo(){
    
             filmeTemp.nome = dadosFilme[0];
             filmeTemp.produtora = dadosFilme[1];
-            filmeTemp.nota = stoi(dadosFilme[2]);
+            filmeTemp.nota = stod(dadosFilme[2]);
             insercaoOrdenada(filmeTemp);
         }      
     }
@@ -335,9 +347,8 @@ istream& operator>>(istream &in, Filme &filmeNovo){
         exit(-1);
     }
 
-    if(!(Catalogo::ehAlphaNumerico(filmeNovo.nome) 
-        && Catalogo::ehAlphaNumerico(filmeNovo.produtora)
-        && filmeNovo.nota >= 0)){
+    if(!(Catalogo::ehAlphaNumerico(filmeNovo.nome))
+        || !(Catalogo::ehAlphaNumerico(filmeNovo.produtora))){
         cout << "\nNomes invalidos\n";
         exit(-1);
     }
@@ -383,6 +394,6 @@ bool Catalogo::ehNumerico(char *entrada){
     if(*endptr != '\0' || endptr == entrada){
         return false;
     }
-        
+
     return true;
 }

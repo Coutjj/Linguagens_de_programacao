@@ -38,6 +38,7 @@ class Catalogo
         vector<string> cortarNome(string ); // Retorna palavras de uma string divididas em um vetor
         void insercaoOrdenada(Filme ); // insere um filme de maneira ordenada
         void lerCatalogoSalvo(); //le a persistencia do catalogo em catalogo.txt
+        int numMaxFilmes = 10;
         
     public:
         Catalogo();
