@@ -23,26 +23,33 @@ class Arvore
         };
 
         No *operator+=(T dadosInput){
+            
+            No novoNo;
+            novoNo.dados = dadosInput;
+            novoNo.esquerda = NULL;
+            novoNo.direita = NULL;
+
             if (raiz == nullptr){
-                No novoNo;
-                novoNo.dados = dadosInput;
-                novoNo.esquerda = NULL;
-                novoNo.direita = NULL;
                 raiz = &novoNo;
                 return raiz;
             }
             
             bool noEncontrado = 0;
             No noAtual = *raiz;
-
+            /*E preciso montar uma fila com os nos salvos*/
             cout << "\n" << raiz->dados.getNome() << endl;
             while(noEncontrado == 0){
                 
                 //adicionar a esquerda
-                if((dadosInput.getNome().compare(noAtual) > 0) && noAtual->esquerda == nullptr){
-                    noAtual->esquerda = *dadosInput;
-                    cout << "\n" << dadosInput.getNome() << " Esq " << noAtual.getNome() << endl;
-                    return noAtual; 
+                if(dadosInput.getNome().compare(noAtual.dados.getNome()) > 0){
+                    if(noAtual.esquerda == nullptr){
+                        noAtual.esquerda = &novoNo;
+                        cout << "\n" << dadosInput.getNome() << " Esq " << noAtual.dados.getNome() << endl;
+                        return &noAtual;
+                    }
+                    else{
+                        noAtual = *noAtual.esquerda;
+                    }
                 }
 
 
