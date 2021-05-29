@@ -2,24 +2,33 @@
 
 
 void Cadastro::inserirPaciente(Paciente pacienteInput){
-    arvoreCadastro += pacienteInput;
+    arvoreCadastro += pacienteInput;    
 }
 
 void Cadastro::imprime(){
-    printPreorder(arvoreCadastro.raiz);
+    cout << arvoreCadastro;
 }
 
-void Cadastro::printPreorder(No<Paciente> * no){
-// Stop printing if no node found
-    if (no == NULL) 
-          return; 
-  
-     /* first print data of node */
-     cout <<  no->dados.getNome() << endl;   
-  
-     /* then recur on left subtree */
-     printPreorder(no->esquerda);   
-  
-     /* now recur on right subtree */
-     printPreorder(no->direita);
+void Cadastro::busca(){
+    
+    string nomeInput;
+
+    cout << "\nDigite o nome a ser buscado:\n\n";
+    cin >> nomeInput;
+
+    if(cin.fail()){
+        cout << "\nOpcao invalida\n";
+        exit(-1);
+    }
+
+    No<Paciente> *noBusca = arvoreCadastro(nomeInput);
+    if(noBusca != NULL){
+        cout << "\nDados:\n\n";
+        cout << noBusca->dados << endl;
+    }
+    else{
+        cout << "\nA busca nao retornou resultados.\n";
+    }
+    
 }
+

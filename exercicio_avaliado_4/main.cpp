@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include "cadastro.h"
+#include "arvore.h"
 #include "paciente.h"
 
 int main(){
@@ -32,23 +33,31 @@ int main(){
 	while(escolhaUsuario == 0){
 		cout << "\nEscolha uma das opcoes abaixo ou  digite 0 (zero) para sair.\n\n";
 		cout << "(1) Imprimir cadastro\n";
+		cout << "(2) Buscar paciente\n\n";
 
 		cin >> escolhaUsuario;
 
 		if(cin.fail()){
-			cout << "\nEntrada errada\n";
+			cout << "\nEntrada invalida\n";
 			exit(-1);
 		}
-
+	
 		switch (escolhaUsuario)
 		{
 			case 1:
 				cadastroHospital.imprime();
 				break;
-			
+			case 2:
+				cadastroHospital.busca();
+				break;
+			case 0:
+				exit(0);
+				break;
 			default:
 				break;
 		}
+
+		escolhaUsuario = 0;
 	}
 	
 }

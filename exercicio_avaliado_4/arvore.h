@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <vector>
 
 using namespace std;
 
@@ -20,10 +19,42 @@ template <class T>
 class Arvore
 {
     private:
+        static void printRecursivo(No<T> * no){
+            // Stop printing if no node found
+            if (no == NULL){
+                return;
+            }
+
+            /* first print data of node */
+            cout <<  no->dados.getNome() << endl;   
+
+            /* then recur on left subtree */
+            printRecursivo(no->esquerda);   
+
+            /* now recur on right subtree */
+            printRecursivo(no->direita);
+        };
+
+        No<T> *buscaRecursiva(No<T>* no, string nomeInput){
+            // Stop printing if no node found
+            if (no == NULL){
+                return NULL;
+            } 
+            else if(no->dados.getNome() == nomeInput){
+                return no;
+            }
+            else if(nomeInput.compare(no->dados.getNome()) > 0){
+                return buscaRecursiva(no->esquerda, nomeInput);
+            }
+            else {
+                return buscaRecursiva(no->direita, nomeInput);
+            }
+            
+        };
         
     public:
         No<T> *raiz;
-        
+
         Arvore(){
 
         };
@@ -51,7 +82,6 @@ class Arvore
             No<T> *noAnterior = (No<T> *) malloc(sizeof(No <T>));
             noAnterior = NULL;
             
-            cout << "\n" << (*(*noAtual)).dados.getNome() << endl;
             string nomeAtual;
             while((*noAtual) != nullptr){
                 noAnterior = *noAtual;
@@ -59,7 +89,6 @@ class Arvore
                 if(dadosInput.getNome().compare((*(*noAtual)).dados.getNome()) > 0){
         
                     nomeAtual = (*(*noAtual)).dados.getNome();
-                    cout << nomeAtual << endl;
                     noAtual = &((*noAtual))->esquerda;
                 }
                 else{
@@ -75,10 +104,22 @@ class Arvore
             else{
                 noAnterior->direita = novoNo;
                 novoNo->pai = noAnterior;
+                return novoNo;
             }
             
             return NULL;
         };
+
+        friend ostream & operator<<(ostream &out, Arvore<T> &arvoreInput){
+            out << "\nCadastro:\n\n";
+            printRecursivo(arvoreInput.raiz);
+            return out;
+        };
+
+        No<T> * operator()(string nomeInput){
+            return buscaRecursiva(raiz, nomeInput);
+        };
+
 };
 
 #endif // ARVORE_H

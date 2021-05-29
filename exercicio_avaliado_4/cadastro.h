@@ -1,19 +1,22 @@
 #ifndef CADASTRO_H
 #define CADASTRO_H
 
+#include <iostream>
 #include "arvore.h"
 #include "paciente.h"
+
+using namespace std;
 
 class Cadastro
 {
     private:
-        Arvore <Paciente> arvoreCadastro;
-        void printPreorder(No<Paciente> *);
+        
     public:
-        // Cadastro();
+        // Cadastro(){};
+        Arvore <Paciente> arvoreCadastro;
         void inserirPaciente(Paciente );
         void imprime();
-        
+        void busca();
 };
 
 
