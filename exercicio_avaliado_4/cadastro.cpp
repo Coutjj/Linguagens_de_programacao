@@ -2,5 +2,7 @@
 
 
 void Cadastro::inserirPaciente(Paciente pacienteInput){
-    arvoreCadastro += pacienteInput;
+    No<Paciente> *no;
+    no = arvoreCadastro += pacienteInput;
+    cout << "\nImprimindo raiz " << no->dados.getNome() << endl;
 }

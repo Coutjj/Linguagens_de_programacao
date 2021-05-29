@@ -23,6 +23,9 @@ int main(){
 	Cadastro cadastroHospital;
 
 	cadastroHospital.inserirPaciente(paciente1);
+
+	
+
 	cadastroHospital.inserirPaciente(paciente2);
 
 	std::cout << "\nPaciente inserido\n";
