@@ -14,3 +14,9 @@ void Paciente::inserirNome(string nomeInput){
 string Paciente::getNome(){
     return nome;
 }
+
+ostream& operator<<(ostream &out, Paciente &pacienteIput){
+
+    out << pacienteIput.getNome();
+    return out;
+}

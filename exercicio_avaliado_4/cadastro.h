@@ -8,9 +8,12 @@ class Cadastro
 {
     private:
         Arvore <Paciente> arvoreCadastro;
+        void printPreorder(No<Paciente> *);
     public:
         // Cadastro();
         void inserirPaciente(Paciente );
+        void imprime();
+        
 };
 
 

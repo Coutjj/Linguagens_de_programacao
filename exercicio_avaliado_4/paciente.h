@@ -2,6 +2,7 @@
 #define PACIENTE_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ class Paciente
         Paciente();
         void inserirNome(string );
         string getNome();
+        friend ostream& operator<<(ostream &, Paciente &);
 };
 
 
