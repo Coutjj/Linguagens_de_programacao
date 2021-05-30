@@ -66,7 +66,8 @@ void PacienteRecuperado::setDoencaPrevia(){
     string doenca;
 
     cout << "\nInserir doenca:\n\n";
-    cin >> doenca;
+    cin.ignore();
+    getline(cin, doenca);
 
     if(cin.fail()){
         cout << "\nEntrada invalida.\n";
