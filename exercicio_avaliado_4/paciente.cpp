@@ -1,3 +1,14 @@
+/*
+  *  Universidade Federal do Rio de Janeiro
+  *  Escola Politecnica
+  *  Departamento de Eletronica e de Computacao
+  *  EEL770 - Linguagens de Programação - Turma 2020/2
+  *  Prof: Miguel Elias Mitre Campista
+  *  Autor: Juan Coutinho Lima
+  * 
+  * Classe que implementa o objeto Paciente e sua classe herdeira (PacienteRecuperado).
+*/
+
 #include <string>
 #include "paciente.h"
 
