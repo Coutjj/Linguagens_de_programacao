@@ -15,24 +15,30 @@
 #include "arvore.h"
 #include "paciente.h"
 
+
 int main(){
 
 	int escolhaUsuario = 0;
-	Paciente paciente1, paciente2, paciente3;
-	paciente1.inserirNome("Juan");
-	paciente2.inserirNome("Luiz");
-	paciente3.inserirNome("Manuel");
 
-	Cadastro cadastroHospital;
+	Cadastro<Paciente> cadastroPaciente;
+	Cadastro<PacienteRecuperado> cadastroPacienteRecuperado;
 
-	cadastroHospital.inserirPaciente(paciente1);
-	cadastroHospital.inserirPaciente(paciente2);
-	cadastroHospital.inserirPaciente(paciente3);
+	Arvore<Paciente> arvorePaciente;
+	Arvore<PacienteRecuperado> arvorePacienteRecuperado;
+	
+	cadastroPaciente.inserirArvore(arvorePaciente);
+	cadastroPacienteRecuperado.inserirArvore(arvorePacienteRecuperado);
 
+	// Paciente novoPaciente;
+	// novoPaciente.inserirNome();
+	// cadastroPaciente.inserirPaciente(novoPaciente);
 
 	while(escolhaUsuario == 0){
 		cout << "\nEscolha uma das opcoes abaixo ou  digite 0 (zero) para sair.\n\n";
-		cout << "(1) Imprimir cadastro\n";
+		cout << "(1) Inserir paciente\n";
+		cout << "(2) Inserir paciente recuperado\n";
+		cout << "(3) Imprimir cadastro de pacientes\n";
+		cout << "(4) Imprimir cadastro de pacientes recuperados\n";
 		cout << "(2) Buscar paciente\n\n";
 
 		cin >> escolhaUsuario;
@@ -45,10 +51,28 @@ int main(){
 		switch (escolhaUsuario)
 		{
 			case 1:
-				cadastroHospital.imprime();
+			{
+				Paciente novoPaciente;
+				novoPaciente.inserirNome();
+				cadastroPaciente.inserirPaciente(novoPaciente);
+			}
 				break;
 			case 2:
-				cadastroHospital.busca();
+			{
+				PacienteRecuperado novoPacienteRecuperado;
+				novoPacienteRecuperado.setPaciente();
+				cadastroPacienteRecuperado.inserirPaciente(novoPacienteRecuperado);
+			}
+				break;
+			case 3:
+			{
+				cadastroPaciente.imprime();
+			}
+				break;
+			case 4:
+			{
+				cadastroPacienteRecuperado.imprime();
+			}
 				break;
 			case 0:
 				exit(0);

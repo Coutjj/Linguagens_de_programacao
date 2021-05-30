@@ -26,7 +26,7 @@ class Arvore
             }
 
             /* first print data of node */
-            cout <<  no->dados.getNome() << endl;   
+            cout <<  no->dados << endl;   
 
             /* then recur on left subtree */
             printRecursivo(no->esquerda);   
@@ -56,17 +56,15 @@ class Arvore
         No<T> *raiz;
 
         Arvore(){
-
+            raiz = NULL;
         };
 
         No<T> *operator+=(T dadosInput){
-
             No<T> *novoNo = (No<T> *) malloc(sizeof(No<T>));
             novoNo->dados = dadosInput;
             novoNo->esquerda = NULL;
             novoNo->direita = NULL;
             novoNo->pai = NULL;
-
 
             if (raiz == nullptr){
                 raiz = novoNo;
@@ -92,6 +90,7 @@ class Arvore
                     noAtual = &((*noAtual))->esquerda;
                 }
                 else{
+                    nomeAtual = (*(*noAtual)).dados.getNome();
                     noAtual = &((*noAtual))->direita;
                 }
             }
