@@ -60,6 +60,14 @@ class Arvore
         };
 
         No<T> *operator+=(T dadosInput){
+
+            //Retorna null quando entrada eh impropria
+            for(auto letra: dadosInput.getNome()){
+                if(!isalnum(letra)){
+                    return NULL;
+                }
+            }
+            
             No<T> *novoNo = (No<T> *) malloc(sizeof(No<T>));
             novoNo->dados = dadosInput;
             novoNo->esquerda = NULL;

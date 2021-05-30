@@ -29,17 +29,14 @@ int main(){
 	cadastroPaciente.inserirArvore(arvorePaciente);
 	cadastroPacienteRecuperado.inserirArvore(arvorePacienteRecuperado);
 
-	// Paciente novoPaciente;
-	// novoPaciente.inserirNome();
-	// cadastroPaciente.inserirPaciente(novoPaciente);
-
 	while(escolhaUsuario == 0){
 		cout << "\nEscolha uma das opcoes abaixo ou  digite 0 (zero) para sair.\n\n";
 		cout << "(1) Inserir paciente\n";
 		cout << "(2) Inserir paciente recuperado\n";
 		cout << "(3) Imprimir cadastro de pacientes\n";
 		cout << "(4) Imprimir cadastro de pacientes recuperados\n";
-		cout << "(2) Buscar paciente\n\n";
+		cout << "(5) Buscar paciente\n";
+		cout << "(6) Buscar paciente recuperado\n\n";
 
 		cin >> escolhaUsuario;
 
@@ -53,14 +50,12 @@ int main(){
 			case 1:
 			{
 				Paciente novoPaciente;
-				novoPaciente.inserirNome();
 				cadastroPaciente.inserirPaciente(novoPaciente);
 			}
 				break;
 			case 2:
 			{
 				PacienteRecuperado novoPacienteRecuperado;
-				novoPacienteRecuperado.setPaciente();
 				cadastroPacienteRecuperado.inserirPaciente(novoPacienteRecuperado);
 			}
 				break;
@@ -72,6 +67,16 @@ int main(){
 			case 4:
 			{
 				cadastroPacienteRecuperado.imprime();
+			}
+				break;
+			case 5:
+			{
+				cadastroPaciente.busca();
+			}
+				break;
+			case 6:
+			{
+				cadastroPacienteRecuperado.busca();
 			}
 				break;
 			case 0:

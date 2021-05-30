@@ -10,11 +10,13 @@ class Paciente
 {
     private:
         string nome;
+        unsigned int idade;
     public:
-        // Paciente(string );
-        // Paciente();
+        Paciente();
         string getNome();
         void inserirNome();
+        void setIdade();
+        unsigned int getIdade();
         friend ostream& operator<<(ostream &, Paciente &);
 };
 
@@ -22,14 +24,13 @@ class PacienteRecuperado: public Paciente{
 
     private:
         string doencaPrevia;
-    public:
-        // PacienteRecuperado():Paciente(){
-        //     inserirNome();
-        //     setDoencaPrevia();
-        // };
-        void setPaciente();
-        friend ostream& operator<<(ostream &, PacienteRecuperado &);
         void setDoencaPrevia();
+    public:
+        PacienteRecuperado():Paciente(){
+            setDoencaPrevia();
+        };
+
+        friend ostream& operator<<(ostream &, PacienteRecuperado &);
         string getDoencaPrevia();
 };
 

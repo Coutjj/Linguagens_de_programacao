@@ -3,22 +3,19 @@
 
 using namespace std;
 
-// Paciente::Paciente(string nomeInput){
-//     inserirNome(nomeInput);
-// }
-
-// Paciente::Paciente(){
-//     inserirNome();
-// }
+Paciente::Paciente(){
+    inserirNome();
+    setIdade();
+}
 
 void Paciente::inserirNome(){
     
     string nomeInput;
-    cout << "\nEntre com o nome do paciente\n";
+    cout << "\nEntre com o nome do paciente:\n\n";
     cin >> nomeInput;
     
     if(cin.fail()){
-        cout << "\nEntrada invalida\n";
+        cout << "\nEntrada invalida.\n";
         exit(-1);
     }
     
@@ -29,9 +26,27 @@ string Paciente::getNome(){
     return nome;
 }
 
+void Paciente::setIdade(){
+    
+    unsigned int idadeInput;
+    cout << "\nEntre com a idade do paciente:\n\n";
+    cin >> idadeInput;
+    
+    if(cin.fail() || idadeInput > 110){
+        cout << "\nEntrada invalida.\n";
+        exit(-1);
+    }
+    
+    idade = idadeInput;
+}
+
+unsigned int Paciente::getIdade(){
+    return idade;
+}
 
 ostream& operator<<(ostream &out, Paciente &pacienteIput){
     out << pacienteIput.getNome();
+    out << " - Idade: " << pacienteIput.getIdade();
     return out;
 }
 
@@ -39,11 +54,11 @@ void PacienteRecuperado::setDoencaPrevia(){
 
     string doenca;
 
-    cout << "\n\nInserir doenca:\n\n";
+    cout << "\nInserir doenca:\n\n";
     cin >> doenca;
 
     if(cin.fail()){
-        cout << "\nEntrada invalida\n";
+        cout << "\nEntrada invalida.\n";
         exit(-1);
     }
 
@@ -56,11 +71,7 @@ string PacienteRecuperado::getDoencaPrevia(){
 
 ostream& operator<<(ostream &out, PacienteRecuperado &pacienteIput){
     out << pacienteIput.getNome();
-    out << " - " << pacienteIput.getDoencaPrevia();
+    out << " - Idade: " << pacienteIput.getIdade();
+    out << " - Recuperado de: " << pacienteIput.getDoencaPrevia();
     return out;
-}
-
-void PacienteRecuperado::setPaciente(){
-    inserirNome();
-    setDoencaPrevia();
 }

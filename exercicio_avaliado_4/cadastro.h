@@ -4,6 +4,7 @@
 #include <iostream>
 #include "arvore.h"
 #include "paciente.h"
+#include "nullPointerException.h"
 
 using namespace std;
 
@@ -21,7 +22,22 @@ class Cadastro
         Arvore <T> arvoreCadastro;
 
         void inserirPaciente(T pacienteInput){
-            arvoreCadastro += pacienteInput; 
+            No<T> *noPtr = arvoreCadastro += pacienteInput;
+            try
+            {
+                if(noPtr != NULL){
+                    cout << "\nPaciente inserido" << endl;
+                }
+                else{
+                    throw NullPointerException();
+                }
+                
+            }
+            catch(NullPointerException& e)
+            {
+                cout << '\n' << e.what() << '\n';
+                cout << "Nao foi possivel inserir o paciente.\n";
+            }
         };
 
         void imprime(){
@@ -40,13 +56,24 @@ class Cadastro
             }
 
             No<T> *noBusca = arvoreCadastro(nomeInput);
-            if(noBusca != NULL){
+       
+            try
+            {
                 cout << "\nDados:\n\n";
-                cout << noBusca->dados << endl;
+                if(noBusca != NULL){
+                    cout << noBusca->dados << endl;
+                }
+                else{
+                    throw NullPointerException();
+                }
+                
             }
-            else{
-                cout << "\nA busca nao retornou resultados.\n";
+            catch(NullPointerException& e)
+            {
+                cout << '\n' << e.what() << '\n';
+                cout << "A busca nao retornou resultados.\n";
             }
+            
         };
 };
 
