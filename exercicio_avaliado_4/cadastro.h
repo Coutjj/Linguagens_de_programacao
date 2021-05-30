@@ -25,10 +25,13 @@ template<class T>
 class Cadastro
 {
     private:
+        
+        
+    public:
+
         //Arvore de tipo geral utilizada pelo cadastro.
         Arvore <T> arvoreCadastro;
         
-    public:
         //Insere arvore a ser utilizada no cadastro.
         void inserirArvore(Arvore<T> arvoreInput){
             arvoreCadastro = arvoreInput;
