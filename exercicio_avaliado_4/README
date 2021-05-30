@@ -1,0 +1,83 @@
+Universidade Federal do Rio de Janeiro
+Escola Politecnica
+Departamento de Eletronica e de Computacao
+EEL670 - Linguagens de Programação - Turma 2020/2
+Prof: Miguel Elias Mitre Campista
+Autor: Juan Coutinho Lima
+
+Avaliacao 4. Programa para gerenciamento de um cadastro de pacientes.
+
+## Indicação para compilação e execução:
+    
+    Para compilar o programa, basta acessar o diretorio contendo o arquivo Makefile e no terminal
+    executar o seguinte comando:
+    
+    $ make all
+
+    Apos essa ação o programa pode ser executado no terminal através do seguinte comando:
+
+    $ ./exec 
+
+    O programa pode ser opcionalmente compilado e linkeditado da seguinte maneira:
+
+    $ g++ -Wall -o exec paciente.cpp main.cpp
+
+    É recomendado que antes de uma segunda compilacao o seguinte comando seja executado:
+
+    $ make clean
+
+## Como utilizar:
+    O programa prevê a insercao de apenas o primeiro nome do paciente quando o atributo nome é requisitado.
+    O nome nao deve conter caracteres especiais ou espaçamento, a menos que o objetivo seja testar o 
+    tratamento de exceções de erro, como no caso do retorno de um ponteiro nulo. 
+    
+    Ao executar o programa recebemos a seguinte mensagem, que requisita uma entrada:
+   
+        Escolha uma das opcoes abaixo ou  digite 0 (zero) para sair.
+
+        (1) Inserir paciente
+        (2) Inserir paciente recuperado
+        (3) Imprimir cadastro de pacientes
+        (4) Imprimir cadastro de pacientes recuperados
+        (5) Buscar paciente
+        (6) Buscar paciente recuperado
+
+
+
+    Basta selecionar uma das opcoes e apertar enter.
+    
+    Opçõe 1:
+        Nesta opção o usuario poderá inserir um paciente da classe base Paciente, onde são requisitados
+        o nome e a idade que se deseja inserir. Essas informações devem ser inseridas a medida que forem 
+        requisitadas na linha de comando.
+    
+    Opção 2:
+        Nesta opção o usuario poderá inserir um paciente da classe filha PacienteRecuperado, onde são 
+        requisitados o nome, idade e doença prévia que se deseja inserir. Essas informações devem ser 
+        inseridas a medida que forem requisitadas na linha de comando.
+
+    Opção 3:
+        Nesta opção podemos visualizar o cadastro completo de pacientes da classe Paciente e seus 
+        atributos.
+
+    Opção 4:
+        Nesta opção podemos visualizar o cadastro completo de pacientes da classe PacienteRecuperado e 
+        seus atributos.
+    
+    Opção 5:
+        Ao selecionar a opção (5) o usuário pode consultar a existência de um paciente no cadastro de
+        pacientes da classe Paciente. Para isso, basta indicar o nome do paciente a ser buscado quando
+        esta informação for requerida.
+    
+    Opção 6:
+        Ao selecionar a opção (6) o usuário pode consultar a existência de um paciente recuperado no 
+        cadastro de pacientes da classe PacienteRecuperado. Para isso, basta indicar o nome do paciente
+        a ser buscado quando esta informação for requerida.
+        
+    A terminar a execução de uma das opções o usuário pode escolher outra opção ou digitar 
+    0 (zero) para sair.
+
+    Obs.: O menu foi dividido em escolhas de paciente e paciente recuperado apenas para demonstrar as 
+    diferenças dos atributos da classe base e da classe herdeira. Como a classe PacienteRecuperado é
+    herdeira da classe Paciente, é possivel passar um objeto do tipo PacienteRecuperado para a classe
+    Cadastro<Paciente>.
